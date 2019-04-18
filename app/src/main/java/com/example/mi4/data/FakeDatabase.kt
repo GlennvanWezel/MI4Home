@@ -2,7 +2,8 @@ package com.example.mi4.data
 
 class FakeDatabase private constructor() {
 
-    var itemDao = itemDao()
+    var itemDao = ItemDao()
+        private set
 
     companion object{
         @Volatile private var instance: FakeDatabase? = null
