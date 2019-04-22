@@ -1,6 +1,6 @@
-package com.example.mi4.ui.voorwerpen
+package com.example.mi4.ui
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.example.mi4.data.Item
 import com.example.mi4.data.ItemRepository
 
