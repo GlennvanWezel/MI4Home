@@ -52,11 +52,14 @@ class AddItemFragment : Fragment() {
 
         button_add_item.setOnClickListener{
             val item = Item(
-                editText_itemName.text.toString()
-                , editText_room.text.toString()
-                , editText_type.text.toString()
-                , editText_value.text.toString().toDouble()
-            )
+                editText_itemName.text.toString().trim()
+                , editText_room.text.toString().trim()
+                , editText_type.text.toString().trim()
+                , if(editText_value.text.toString().trim() != ""){
+                    editText_value.text.toString().toDouble()}
+                else 0.00)
+
+
             viewModel.addItem(item)
             editText_itemName.setText("")
             editText_room.setText("")

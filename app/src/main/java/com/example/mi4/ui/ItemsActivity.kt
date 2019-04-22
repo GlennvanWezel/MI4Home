@@ -33,6 +33,6 @@ class ItemsActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(null,navController)
+        return NavigationUI.navigateUp(navController,null)
     }
 }
