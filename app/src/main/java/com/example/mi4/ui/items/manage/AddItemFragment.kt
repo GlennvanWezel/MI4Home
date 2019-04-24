@@ -53,8 +53,8 @@ class AddItemFragment : Fragment() {
         button_add_item.setOnClickListener{
             val item = Item(
                 editText_itemName.text.toString().trim()
-                , editText_room.text.toString().trim()
-                , editText_type.text.toString().trim()
+                , spinner_room.selectedItem.toString().trim()
+                , spinner_type.selectedItem.toString().trim()
                 , if(editText_value.text.toString().trim() != ""){
                     editText_value.text.toString().toDouble()}
                 else 0.00)
@@ -62,8 +62,8 @@ class AddItemFragment : Fragment() {
 
             viewModel.addItem(item)
             editText_itemName.setText("")
-            editText_room.setText("")
-            editText_type.setText("")
+            spinner_room.setSelection(0)
+            spinner_room.setSelection(0)
             editText_value.setText("")
         }
     }

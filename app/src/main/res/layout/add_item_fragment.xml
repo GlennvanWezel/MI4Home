@@ -35,13 +35,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:hint="Item Name (e.g. Bed, laptop)"
+            android:hint="@string/itemnamehint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_items"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintVertical_bias="0.0" android:inputType="text" android:autofillHints=""/>
 
     <EditText
             android:id="@+id/editText_value"
@@ -52,16 +52,15 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:hint="Value"
+            android:hint="@string/value"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_itemName"
-            app:layout_constraintVertical_bias="0.0"/>
-
-    <EditText
-            android:id="@+id/editText_room"
+            app:layout_constraintVertical_bias="0.0" android:inputType="numberDecimal" android:autofillHints=""/>
+    <Spinner
+            android:id="@+id/spinner_room"
             android:layout_width="0dp"
             app:layout_constraintWidth_percent="0.7"
             android:layout_height="wrap_content"
@@ -69,15 +68,15 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:hint="Room"
+            android:hint="@string/spinnerRoomHint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_value"
             app:layout_constraintVertical_bias="0.0"/>
-    <EditText
-            android:id="@+id/editText_type"
+    <Spinner
+            android:id="@+id/spinner_type"
             android:layout_width="0dp"
             app:layout_constraintWidth_percent="0.7"
             android:layout_height="wrap_content"
@@ -85,12 +84,12 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:hint="Type (e.g. electronics, furniture)"
+            android:hint="@string/spinnertypehint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_room"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_room"
             app:layout_constraintVertical_bias="0.0"/>
     <Button
             android:id="@+id/button_add_item"
@@ -100,9 +99,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="?colorAccent"
-            android:text="Add Item"
+            android:text="@string/add_item"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/editText_type"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner_type"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/editText_itemName"

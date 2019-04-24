@@ -6,9 +6,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.items.list.itemListFragment">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="item list"/>
+    <ListView android:layout_width="match_parent" android:layout_height="match_parent"/>
 
 </FrameLayout>
