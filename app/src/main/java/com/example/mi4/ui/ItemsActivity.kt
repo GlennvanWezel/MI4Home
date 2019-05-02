@@ -1,7 +1,5 @@
 package com.example.mi4.ui
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,11 +8,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.mi4.R
-import com.example.mi4.data.Item
-import com.example.mi4.utilities.InjectorUtils
 import kotlinx.android.synthetic.main.activity_items.*
-import java.lang.StringBuilder
-import java.security.AccessController
 
 class ItemsActivity : AppCompatActivity() {
 

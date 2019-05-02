@@ -2,6 +2,7 @@ package com.example.mi4.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.mi4.data.db.entity.Item
 
 class ItemDao {
     private val itemlist = mutableListOf<Item>()
