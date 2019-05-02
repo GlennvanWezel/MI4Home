@@ -5,7 +5,7 @@ import kotlinx.coroutines.Deferred
 interface FirebaseService {
     val mAuth : FirebaseAuth
 
-    fun login(email: String, password: String): Deferred<{
+    fun login(email: String, password: String){
         mAuth.signInWithEmailAndPassword(email,password)
     }
 }
