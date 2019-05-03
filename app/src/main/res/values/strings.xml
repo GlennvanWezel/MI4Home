@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">MI4</string>
-    <string name="spinnertypehint">Type (e.g. electronics, furniture)</string>
-    <string name="spinnerRoomHint">Room</string>
-    <string name="add_item">Add Item</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="itemnamehint">Name</string>
     <string name="value">Value</string>
-    <string name="itemnamehint">Item Name (e.g. Bed, laptop)</string>
+    <string name="spinnerRoomHint">Room</string>
+    <string name="spinnertypehint">Type (e.g. electronics)</string>
+    <string name="add_item">Add Item</string>
 </resources>

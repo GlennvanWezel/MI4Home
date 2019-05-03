@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/mobile_navigation" app:startDestination="@id/itemListFragment">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/mobile_navigation" app:startDestination="@id/loginFragment">
 
     <fragment android:id="@+id/settingsFragment" android:name="com.example.mi4.ui.settings.SettingsFragment"
               android:label="SettingsFragment"/>
@@ -9,4 +9,13 @@
               android:label="item_list_fragment" tools:layout="@layout/item_list_fragment"/>
     <fragment android:id="@+id/addItemFragment" android:name="com.example.mi4.ui.items.manage.AddItemFragment"
               android:label="add_item_fragment" tools:layout="@layout/add_item_fragment"/>
+    <fragment android:id="@+id/loginFragment" android:name="com.example.mi4.ui.login.LoginFragment"
+              android:label="login_fragment" tools:layout="@layout/login_fragment">
+        <action android:id="@+id/action_loginFragment_to_registerFragment" app:destination="@id/registerFragment"/>
+        <action android:id="@+id/action_loginFragment_to_itemListFragment" app:destination="@id/itemListFragment"/>
+    </fragment>
+    <fragment android:id="@+id/registerFragment" android:name="com.example.mi4.ui.register.RegisterFragment"
+              android:label="register_fragment" tools:layout="@layout/register_fragment">
+        <action android:id="@+id/action_registerFragment_to_itemListFragment" app:destination="@id/itemListFragment"/>
+    </fragment>
 </navigation>

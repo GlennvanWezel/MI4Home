@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 
 import com.example.mi4.R
-import com.example.mi4.data.Item
+import com.example.mi4.data.db.entity.Item
 import com.example.mi4.ui.ItemsViewModel
 import com.example.mi4.utilities.InjectorUtils
 import kotlinx.android.synthetic.main.add_item_fragment.*
@@ -55,9 +55,10 @@ class AddItemFragment : Fragment() {
                 editText_itemName.text.toString().trim()
                 , spinner_room.selectedItem.toString().trim()
                 , spinner_type.selectedItem.toString().trim()
-                , if(editText_value.text.toString().trim() != ""){
-                    editText_value.text.toString().toDouble()}
-                else 0.00)
+                , if (editText_value.text.toString().trim() != "") {
+                    editText_value.text.toString().toDouble()
+                } else 0.00
+            )
 
 
             viewModel.addItem(item)

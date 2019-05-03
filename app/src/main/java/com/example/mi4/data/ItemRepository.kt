@@ -1,5 +1,7 @@
 package com.example.mi4.data
 
+import com.example.mi4.data.db.entity.Item
+
 class ItemRepository private constructor(private val itemDao: ItemDao){
 
     fun addItem(item: Item){
