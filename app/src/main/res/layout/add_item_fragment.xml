@@ -7,6 +7,15 @@
         android:layout_height="match_parent"
         tools:context=".ui.items.manage.AddItemFragment">
 
+    <ImageView android:id="@+id/imageView_profilePicture"
+               android:layout_width="20dp"
+               android:layout_height="20dp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintLeft_toLeftOf="parent"
+               android:contentDescription="@string/the_users_profile_picture"
+
+    />
+
     <TextView
             android:id="@+id/textView_items"
             android:layout_width="match_parent"
@@ -23,8 +32,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@id/imageView_profilePicture"
+            app:layout_constraintVertical_bias="0.0"/>
 
     <EditText
             android:id="@+id/editText_itemName"

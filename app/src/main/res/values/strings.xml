@@ -8,4 +8,5 @@
     <string name="spinnerRoomHint">Room</string>
     <string name="spinnertypehint">Type (e.g. electronics)</string>
     <string name="add_item">Add Item</string>
+    <string name="the_users_profile_picture">The users\' profile picture</string>
 </resources>
