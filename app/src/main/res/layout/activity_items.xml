@@ -15,6 +15,15 @@
             android:background="?colorPrimary"
             android:theme="@style/ToolbarTheme" />
 
+    <ProgressBar android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:max="100"
+                 android:min="0"
+                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                 android:visibility="gone"/>
+    <TextView android:layout_width="wrap_content"
+              android:id="@+id/testview"
+              android:layout_height="wrap_content"/>
     <fragment
             android:id="@+id/nav_host_fragment"
             android:layout_width="match_parent"

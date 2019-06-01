@@ -9,7 +9,9 @@ interface FirebaseService {
     val USER_ID: String
     fun getItems(): Deferred<List<Item>>
 
-    companion object{
-        operator fun invoke(): FirebaseService
-    }
+   companion object{
+       operator fun invoke(): FirebaseService{
+            return FirebaseService()
+       }
+   }
 }
