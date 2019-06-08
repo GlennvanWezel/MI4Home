@@ -37,7 +37,6 @@ class itemListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(ItemListViewModel::class.java)
         // TODO: Use the ViewModel
 
-
     }
 
     override fun onStart() {
@@ -52,7 +51,7 @@ class itemListFragment : Fragment() {
                 rv_itemsList.layoutManager = LinearLayoutManager(this.context,RecyclerView.VERTICAL,false)
                 viewModel.getItems()
                 viewModel.items.observeForever {
-                    val ira = ItemRecyclerAdapter(it)
+                    val ira = ItemRecyclerAdapter(it.toMutableList())
                     rv_itemsList.adapter = ira
                 }
 

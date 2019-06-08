@@ -31,8 +31,38 @@ class ItemRepositoryImpl : ItemRepository {
                 }
             getCurrentItems()
         }
-
     }
+
+
+    //region CRUD METHODS
+    override suspend fun deleteItem(item: Item) {
+        FirebaseFirestore
+            .getInstance()
+            .collection("users")
+            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .update("items", FieldValue.arrayRemove(item))
+            .await()
+    }
+
+    override suspend fun updateItem(olditem: Item, newitem: Item) {
+        FirebaseFirestore
+            .getInstance()
+            .collection("users")
+            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .update("items", FieldValue.arrayRemove(olditem))
+            .await()
+        FirebaseFirestore
+            .getInstance()
+            .collection("users")
+            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .update("items", FieldValue.arrayUnion(newitem))
+            .await()
+    }
+
+
+
+
+
 
     fun addItem(item: Item) {
         FirebaseFirestore
@@ -77,6 +107,8 @@ class ItemRepositoryImpl : ItemRepository {
             return user!!.items
         }
     }
+
+    //endregion
 
     companion object{
         @Volatile private var instance: ItemRepositoryImpl? = null

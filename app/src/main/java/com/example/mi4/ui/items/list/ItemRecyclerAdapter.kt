@@ -6,7 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mi4.R
 import com.example.mi4.data.db.entity.Item
+import com.example.mi4.data.repository.ItemRepositoryImpl
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 /**
@@ -16,7 +19,7 @@ import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
  * channel: Let's Build that app
  * video title: Kotlin Youtube: Intro to RecyclerView (Ep 1)
  */
-class ItemRecyclerAdapter(val itemlist : List<Item>) : RecyclerView.Adapter<CustomViewHolder>() {
+class ItemRecyclerAdapter(val itemlist : MutableList<Item>) : RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun getItemCount(): Int {
         return itemlist.size
@@ -29,11 +32,19 @@ class ItemRecyclerAdapter(val itemlist : List<Item>) : RecyclerView.Adapter<Cust
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val item = itemlist.get(position)
-        holder?.view?.itemName.text = item.naam
+        val item = itemlist[position]
+        holder.view.itemName.text = item.naam
         holder.view.itemRoom.text = item.kamer
         holder.view.itemType.text = item.type
         holder.view.itemValue.text = item.waarde.toString()
+        holder.view.ib_deleteitem.setOnClickListener {
+            GlobalScope.launch {
+                ItemRepositoryImpl().deleteItem(item)
+            }
+            itemlist.removeAt(position)
+            notifyItemRemoved(position)
+        }
+
     }
 
 }
