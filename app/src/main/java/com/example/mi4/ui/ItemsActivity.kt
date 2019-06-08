@@ -22,6 +22,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_items.*
 
 class ItemsActivity : AppCompatActivity() {
@@ -44,7 +45,7 @@ class ItemsActivity : AppCompatActivity() {
             AuthUI.IdpConfig.EmailBuilder().build()
         )
 
-        FirebaseAuth.getInstance().signOut()
+        //FirebaseAuth.getInstance().signOut()
         if(FirebaseAuth.getInstance().currentUser == null){
             ActivityCompat.startActivityForResult(this,
                 AuthUI.getInstance()
@@ -63,7 +64,7 @@ class ItemsActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == this.RC_SIGN_IN) {
             //val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
@@ -92,7 +93,11 @@ class ItemsActivity : AppCompatActivity() {
                 listOf(
                     Type(1,"Electronics",1200.00)
                 ))
-            FirebaseFirestore.getInstance().collection("users").document(user.uid).set(userEntity)
+            FirebaseFirestore
+                .getInstance()
+                .collection("users")
+                .document(user.uid)
+                .set(userEntity, SetOptions.merge())
 
         }
     }

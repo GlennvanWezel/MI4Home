@@ -10,4 +10,11 @@
     <string name="add_item">Add Item</string>
     <string name="the_users_profile_picture">The users\' profile picture</string>
     <string name="itemsnotyetloaded">ITEMS NOT YET LOADED IN</string>
+    <string name="select_a_room">Select a room</string>
+    <string name="select_a_type">Select a Type</string>
+    <string name="error_select_a_room">Select a Room!</string>
+    <string name="error_select_a_type">Select a Type!</string>
+    <string name="error_value_cannot_be_empty">Wrong input: must not be empty</string>
+    <string name="error_name_cannot_be_empty">Wrong input: must not be empty</string>
+    <string name="the_delete_button">The Delete Button</string>
 </resources>
