@@ -1,5 +1,6 @@
 package com.example.mi4.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mi4.data.db.entity.Item
@@ -9,10 +10,29 @@ import com.example.mi4.data.network.ItemNetworkDataSource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirestoreRegistrar
+import com.google.firebase.firestore.Source
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 
 class ItemRepositoryImpl : ItemRepository {
+
+    private var firestoreDataChanged = true
+
+    init {
+        //datachange listeners
+        GlobalScope.launch {
+            FirebaseFirestore
+                .getInstance()
+                .collection("users")
+                .document(FirebaseAuth.getInstance().currentUser!!.uid)
+                .addSnapshotListener{snapchat, e ->
+                    firestoreDataChanged = !firestoreDataChanged
+                }
+            getCurrentItems()
+        }
+
+    }
 
     fun addItem(item: Item) {
         FirebaseFirestore
@@ -23,25 +43,45 @@ class ItemRepositoryImpl : ItemRepository {
     }
 
     override suspend fun getCurrentItems(): List<Item> {
-        val user = FirebaseFirestore
-            .getInstance()
-            .collection("users")
-            .document(
-                FirebaseAuth
-                    .getInstance()
-                    .currentUser!!
-                    .uid
-            )
-            .get()
-            .await()
-            .toObject(User::class.java)
-        return user!!.items
+        if(firestoreDataChanged){
+            val user = FirebaseFirestore
+                .getInstance()
+                .collection("users")
+                .document(
+                    FirebaseAuth
+                        .getInstance()
+                        .currentUser!!
+                        .uid
+                )
+                .get(Source.SERVER)
+                .await()
+                .toObject(User::class.java)
+            Log.d("Fetching Data From Firestore", "GOT FROM INTERNET: $user")
+            firestoreDataChanged = !firestoreDataChanged
+            return user!!.items
+        }
+        else{
+            val user = FirebaseFirestore
+                .getInstance()
+                .collection("users")
+                .document(
+                    FirebaseAuth
+                        .getInstance()
+                        .currentUser!!
+                        .uid
+                )
+                .get(Source.CACHE)
+                .await()
+                .toObject(User::class.java)
+            Log.d("Fetching Data From Firestore", "GOT FROM CACHE: $user")
+            return user!!.items
+        }
     }
 
     companion object{
         @Volatile private var instance: ItemRepositoryImpl? = null
 
-        fun getInstance() =
+        fun invoke() =
             instance ?: synchronized(this){
                 instance ?: ItemRepositoryImpl().also { instance = it }
             }
