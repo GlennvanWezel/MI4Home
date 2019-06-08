@@ -43,6 +43,7 @@ class ItemRecyclerAdapter(val itemlist : MutableList<Item>) : RecyclerView.Adapt
             }
             itemlist.removeAt(position)
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position, itemlist.size)
         }
 
     }
