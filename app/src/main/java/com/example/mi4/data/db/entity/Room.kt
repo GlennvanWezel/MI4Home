@@ -9,7 +9,7 @@ data class Room (var amountOfItems: Int = 0,
                  var name: String = "Default",
                  var value: Double = 0.00){
     override fun toString(): String {
-        return "$id - Room: $name - Amount Of Items: $amountOfItems - Value: $value"
+        return "N: $name|#Items:$amountOfItems|$$value"
     }
 
     @PrimaryKey(autoGenerate = false)
