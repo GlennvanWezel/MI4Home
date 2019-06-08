@@ -7,16 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.example.mi4.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.item_list_fragment.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.tasks.await
-import kotlin.math.log
 
 class itemListFragment : Fragment() {
 
@@ -30,12 +27,13 @@ class itemListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.i("CREATION ORDER", "itemListFragment | OnCreateView")
+
         return inflater.inflate(R.layout.item_list_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel = ViewModelProviders.of(this).get(ItemListViewModel::class.java)
         // TODO: Use the ViewModel
 
@@ -43,20 +41,22 @@ class itemListFragment : Fragment() {
     }
 
     override fun onStart() {
-        if (ItemListTextView.text == null || ItemListTextView.text == getString(R.string.itemsnotyetloaded)){
+        super.onStart()
+        initializeUi()
+
+    }
+
+    private fun initializeUi() {
+        if (rv_itemsList != null)
             if (FirebaseAuth.getInstance().currentUser != null) {
+                rv_itemsList.layoutManager = LinearLayoutManager(this.context,RecyclerView.VERTICAL,false)
                 viewModel.getItems()
                 viewModel.items.observeForever {
-                    ItemListTextView.text = it.toString()
+                    val ira = ItemRecyclerAdapter(it)
+                    rv_itemsList.adapter = ira
                 }
 
-            } else {
-                ItemListTextView.text = getString(R.string.itemsnotyetloaded)
             }
-        }
-        Log.e("onstart:","itemlistfragment ONSTART, ${viewModel.items}")
-        super.onStart()
-
     }
 
 }
