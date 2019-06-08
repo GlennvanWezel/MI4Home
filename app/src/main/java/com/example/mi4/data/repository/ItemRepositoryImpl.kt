@@ -73,7 +73,24 @@ class ItemRepositoryImpl : ItemRepository {
     }
 
     override suspend fun getCurrentItems(): List<Item> {
-        if(firestoreDataChanged){
+//        if(firestoreDataChanged){
+//            val user = FirebaseFirestore
+//                .getInstance()
+//                .collection("users")
+//                .document(
+//                    FirebaseAuth
+//                        .getInstance()
+//                        .currentUser!!
+//                        .uid
+//                )
+//                .get(Source.SERVER)
+//                .await()
+//                .toObject(User::class.java)
+//            Log.d("Fetching Data From Firestore", "GOT FROM INTERNET: $user")
+//            firestoreDataChanged = !firestoreDataChanged
+//            return user!!.items
+//        }
+//        else{
             val user = FirebaseFirestore
                 .getInstance()
                 .collection("users")
@@ -83,29 +100,12 @@ class ItemRepositoryImpl : ItemRepository {
                         .currentUser!!
                         .uid
                 )
-                .get(Source.SERVER)
-                .await()
-                .toObject(User::class.java)
-            Log.d("Fetching Data From Firestore", "GOT FROM INTERNET: $user")
-            firestoreDataChanged = !firestoreDataChanged
-            return user!!.items
-        }
-        else{
-            val user = FirebaseFirestore
-                .getInstance()
-                .collection("users")
-                .document(
-                    FirebaseAuth
-                        .getInstance()
-                        .currentUser!!
-                        .uid
-                )
-                .get(Source.CACHE)
+                .get(/*Source.CACHE*/)
                 .await()
                 .toObject(User::class.java)
             Log.d("Fetching Data From Firestore", "GOT FROM CACHE: $user")
             return user!!.items
-        }
+//        }
     }
 
     //endregion
