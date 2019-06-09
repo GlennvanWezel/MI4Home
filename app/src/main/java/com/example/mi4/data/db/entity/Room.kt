@@ -2,7 +2,6 @@ package com.example.mi4.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.firebase.database.IgnoreExtraProperties
 
 @Entity(tableName = "rooms")
 data class Room (var amountOfItems: Int = 0,
