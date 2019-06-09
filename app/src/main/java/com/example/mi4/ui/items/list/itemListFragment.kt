@@ -2,12 +2,18 @@ package com.example.mi4.ui.items.list
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.example.mi4.R
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.item_list_fragment.*
 
 class itemListFragment : Fragment() {
 
@@ -21,13 +27,35 @@ class itemListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.item_list_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel = ViewModelProviders.of(this).get(ItemListViewModel::class.java)
         // TODO: Use the ViewModel
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initializeUi()
+
+    }
+
+    private fun initializeUi() {
+        if (rv_itemsList != null)
+            if (FirebaseAuth.getInstance().currentUser != null) {
+                rv_itemsList.layoutManager = LinearLayoutManager(this.context,RecyclerView.VERTICAL,false)
+                viewModel.getItems()
+                viewModel.items.observeForever {
+                    val ira = ItemRecyclerAdapter(it.toMutableList())
+                    rv_itemsList.adapter = ira
+                }
+
+            }
     }
 
 }

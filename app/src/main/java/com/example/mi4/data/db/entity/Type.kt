@@ -5,7 +5,9 @@ import androidx.room.PrimaryKey
 import com.google.firebase.database.IgnoreExtraProperties
 
 @Entity(tableName = "types")
-data class Type (var amountOfItems: Int, var name: String, var value: Double){
+data class Type (var amountOfItems: Int = 0,
+                 var name: String = "Default",
+                 var value: Double = 0.00){
     override fun toString(): String {
         return "$id - Type: $name - Amount Of Items: $amountOfItems - Value: $value"
     }
