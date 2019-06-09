@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MI4</string>
+    <string name="app_name">Inventorizer</string>
     <string name="username">Username</string>
     <string name="login">Login</string>
     <string name="password">Password</string>

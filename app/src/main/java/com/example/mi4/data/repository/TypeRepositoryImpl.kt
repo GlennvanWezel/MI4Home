@@ -18,4 +18,14 @@ class TypeRepositoryImpl : TypeRepository {
             .toObject(User::class.java)!!
             .types
     }
+
+    companion object {
+        @Volatile
+        private var instance: TypeRepositoryImpl? = null
+
+        fun invoke() =
+            instance ?: synchronized(this) {
+                instance ?: TypeRepositoryImpl().also { instance = it }
+            }
+    }
 }
