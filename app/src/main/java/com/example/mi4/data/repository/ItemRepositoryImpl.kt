@@ -1,18 +1,11 @@
 package com.example.mi4.data.repository
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.mi4.data.db.entity.Item
-import com.example.mi4.data.ItemDao
 import com.example.mi4.data.db.entity.User
-import com.example.mi4.data.network.ItemNetworkDataSource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirestoreRegistrar
-import com.google.firebase.firestore.Source
-import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 
 class ItemRepositoryImpl : ItemRepository {
