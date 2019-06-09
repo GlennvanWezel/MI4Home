@@ -17,23 +17,6 @@ import kotlinx.coroutines.tasks.await
 
 class ItemRepositoryImpl : ItemRepository {
 
-    private var firestoreDataChanged = true
-
-    init {
-        //datachange listeners
-        GlobalScope.launch {
-            FirebaseFirestore
-                .getInstance()
-                .collection("users")
-                .document(FirebaseAuth.getInstance().currentUser!!.uid)
-                .addSnapshotListener{snapchat, e ->
-                    firestoreDataChanged = !firestoreDataChanged
-                }
-            getCurrentItems()
-        }
-    }
-
-
     //region CRUD METHODS
     override suspend fun deleteItem(item: Item) {
         FirebaseFirestore
