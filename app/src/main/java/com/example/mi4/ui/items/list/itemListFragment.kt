@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mi4.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.item_list_fragment.*
+import java.lang.Exception
 
 class itemListFragment : Fragment() {
 
@@ -36,26 +37,14 @@ class itemListFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(ItemListViewModel::class.java)
         // TODO: Use the ViewModel
+        initialiseUi()
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        initializeUi()
-
+    private fun initialiseUi() {
+        viewModel.items.observeForever {
+            val ira = ItemRecyclerAdapter(it.toMutableList())
+            rv_itemsList?.adapter = ira
+        }
     }
-
-    private fun initializeUi() {
-        if (rv_itemsList != null)
-            if (FirebaseAuth.getInstance().currentUser != null) {
-                rv_itemsList.layoutManager = LinearLayoutManager(this.context,RecyclerView.VERTICAL,false)
-                viewModel.getItems()
-                viewModel.items.observeForever {
-                    val ira = ItemRecyclerAdapter(it.toMutableList())
-                    rv_itemsList.adapter = ira
-                }
-
-            }
-    }
-
 }

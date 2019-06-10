@@ -5,14 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mi4.data.db.entity.Item
 import com.example.mi4.data.db.entity.User
+import com.example.mi4.ui.items.list.itemListFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class ItemRepositoryImpl : ItemRepository {
 
-    var itemsList = MutableLiveData<List<Item>>()
+    private var itemsList = MutableLiveData<List<Item>>()
 
     var items: LiveData<List<Item>>
         get() {
@@ -22,6 +27,17 @@ class ItemRepositoryImpl : ItemRepository {
 
     init {
         items = itemsList
+        val fbinstance = FirebaseAuth.getInstance()
+        fbinstance.addAuthStateListener {
+            if (it.currentUser != null) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    getCurrentItems()
+                }
+            } else if (it.currentUser == null) {
+                itemsList = MutableLiveData<List<Item>>()
+                items = itemsList
+            }
+        }
     }
 
     //region CRUD METHODS
@@ -58,21 +74,16 @@ class ItemRepositoryImpl : ItemRepository {
             .update("items", FieldValue.arrayUnion(item))
     }
 
-    override suspend fun getCurrentItems(): List<Item> {
-        val user = FirebaseFirestore
+    override suspend fun getCurrentItems() {
+        itemsList.postValue(FirebaseFirestore
             .getInstance()
             .collection("users")
-            .document(
-                FirebaseAuth
-                    .getInstance()
-                    .currentUser!!
-                    .uid
-            )
-            .get(/*Source.CACHE*/)
+            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .get()
             .await()
-            .toObject(User::class.java)
-        Log.d("Fetching Data From Firestore", "GOT FROM CACHE: $user")
-        return user!!.items
+            .toObject(User::class.java)!!
+            .items)
+        items = itemsList
     }
 
     //endregion

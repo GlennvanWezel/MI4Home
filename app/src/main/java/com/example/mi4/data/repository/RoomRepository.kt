@@ -4,7 +4,7 @@ import com.example.mi4.data.db.entity.Room
 
 interface RoomRepository {
     //suspend enables you to call a function from a corouting (Asynchronously)
-    suspend fun getCurrentRooms(): List<Room>
+    suspend fun getCurrentRooms()
     suspend fun deleteRoom(room: Room)
     suspend fun addRoom(room:Room)
     suspend fun updateRoom(oldRoom: Room,newRoom: Room)

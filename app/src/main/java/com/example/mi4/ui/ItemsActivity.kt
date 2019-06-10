@@ -35,6 +35,8 @@ class ItemsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_items)
         setSupportActionBar(toolbar)
+//        supportActionBar?.setDisplayShowHomeEnabled(true)
+//        supportActionBar?.setIcon(R.drawable.ic_launcher_foreground)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 

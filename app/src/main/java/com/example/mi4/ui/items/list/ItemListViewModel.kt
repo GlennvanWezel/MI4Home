@@ -14,21 +14,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class ItemListViewModel : ViewModel() {
-    var itemsRepo : ItemRepositoryImpl
-    var items : MutableLiveData<List<Item>>
+    private var itemsRepo : ItemRepositoryImpl = ItemRepositoryImpl()
+    var items : LiveData<List<Item>>
 
     init {
-        Log.i("CREATION ORDER", "ItemListViewModel | init")
-        itemsRepo = ItemRepositoryImpl()
-        items = MutableLiveData<List<Item>>()
-    }
-
-    fun getItems() {
-        GlobalScope.launch {
-            items.postValue(itemsRepo.getCurrentItems())
+        items = itemsRepo.items
+        itemsRepo.items.observeForever {
+            val itemsmut = MutableLiveData<List<Item>>()
+            itemsmut.value = it
+            items = itemsmut
         }
-
     }
-
-
 }
