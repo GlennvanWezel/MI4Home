@@ -18,7 +18,7 @@ class RoomRepositoryImpl : RoomRepository {
 
     var rooms: LiveData<List<Room>>
         get() {
-            return roomsList
+            return roomsList as LiveData<List<Room>>
         }
 
     init {

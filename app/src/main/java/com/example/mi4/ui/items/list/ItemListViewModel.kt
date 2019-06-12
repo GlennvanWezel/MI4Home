@@ -7,7 +7,7 @@ import com.example.mi4.data.model.Item
 import com.example.mi4.data.repository.ItemRepositoryImpl
 
 class ItemListViewModel : ViewModel() {
-    private var itemsRepo : ItemRepositoryImpl = ItemRepositoryImpl()
+    var itemsRepo : ItemRepositoryImpl = ItemRepositoryImpl()
     var items: LiveData<List<Item>>
 
     init {

@@ -8,6 +8,7 @@ import com.example.mi4.R
 import com.example.mi4.data.model.Item
 import com.example.mi4.data.repository.ItemRepositoryImpl
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -38,7 +39,7 @@ class ItemRecyclerAdapter(val itemlist : MutableList<Item>) : RecyclerView.Adapt
         holder.view.itemType.text = item.type
         holder.view.itemValue.text = item.waarde.toString()
         holder.view.ib_deleteitem.setOnClickListener {
-            GlobalScope.launch {
+            GlobalScope.launch{
                 ItemRepositoryImpl().deleteItem(item)
             }
             itemlist.removeAt(position)

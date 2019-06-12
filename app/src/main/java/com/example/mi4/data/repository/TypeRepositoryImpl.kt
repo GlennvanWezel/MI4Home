@@ -25,7 +25,7 @@ class TypeRepositoryImpl : TypeRepository {
     }
 
     init {
-        types.value = typesList
+        types.postValue(typesList)
         val fbinstance = FirebaseAuth.getInstance()
         fbinstance.addAuthStateListener {
             if (it.currentUser != null) {
@@ -34,7 +34,7 @@ class TypeRepositoryImpl : TypeRepository {
                 }
             } else if (it.currentUser == null) {
                 typesList = mutableListOf<Type>()
-                types.value = typesList
+                types.postValue(typesList)
             }
         }
     }
@@ -78,7 +78,7 @@ class TypeRepositoryImpl : TypeRepository {
     //region helper methods
     private fun add(type: Type) {
         typesList.add(type)
-        types.value = typesList
+        types.postValue(typesList)
         GlobalScope.launch(Dispatchers.IO){
             FirebaseFirestore
                 .getInstance()

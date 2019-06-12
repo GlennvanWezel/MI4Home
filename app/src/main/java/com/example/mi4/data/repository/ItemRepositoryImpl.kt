@@ -21,7 +21,7 @@ class ItemRepositoryImpl : ItemRepository {
 
 
     init {
-        items.value = itemsList
+        items.postValue(itemsList)
         val fbinstance = FirebaseAuth.getInstance()
         fbinstance.addAuthStateListener {
             if (it.currentUser != null) {
@@ -30,7 +30,7 @@ class ItemRepositoryImpl : ItemRepository {
                 }
             } else if (it.currentUser == null) {
                 itemsList = mutableListOf<Item>()
-                items.value = itemsList
+                items.postValue(itemsList)
             }
         }
     }
@@ -43,6 +43,8 @@ class ItemRepositoryImpl : ItemRepository {
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .update("items", FieldValue.arrayRemove(item))
             .await()
+        itemsList.remove(item)
+        items.postValue(itemsList)
     }
 
     override suspend fun updateItem(olditem: Item, newitem: Item) {
@@ -58,6 +60,9 @@ class ItemRepositoryImpl : ItemRepository {
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .update("items", FieldValue.arrayUnion(newitem))
             .await()
+        itemsList.remove(olditem)
+        itemsList.add(newitem)
+        items.postValue(itemsList)
     }
 
 
@@ -67,9 +72,17 @@ class ItemRepositoryImpl : ItemRepository {
             .collection("users")
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .update("items", FieldValue.arrayUnion(item))
+        itemsList.add(item)
+        items.postValue(itemsList)
     }
 
-    override suspend fun getCurrentItems() {
+    /**
+     * Fetches the current stored Items from the Firebase Firestore
+     * Fils the Mutablelist 'itemList' with those items
+     * postValue's the itemList into the MutableLiveData<List<Item>> 'items'
+     *
+     */
+    private suspend fun getCurrentItems() {
         itemsList = (FirebaseFirestore
             .getInstance()
             .collection("users")

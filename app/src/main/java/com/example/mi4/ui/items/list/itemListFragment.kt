@@ -44,7 +44,7 @@ class itemListFragment : Fragment() {
 
     private fun initialiseUi() {
         rv_itemsList.layoutManager = LinearLayoutManager(this.context)
-        val ira = ItemRecyclerAdapter(viewModel.items.value!!.toMutableList())
+        val ira = ItemRecyclerAdapter(mutableListOf())
         rv_itemsList?.adapter = ira
         viewModel.items.observeForever {
             ira.itemlist.clear()
