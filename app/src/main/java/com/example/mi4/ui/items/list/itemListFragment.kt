@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListAdapter
+import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -44,7 +45,7 @@ class itemListFragment : Fragment() {
 
     private fun initialiseUi() {
         rv_itemsList.layoutManager = LinearLayoutManager(this.context)
-        val ira = ItemRecyclerAdapter(mutableListOf())
+        val ira = ItemRecyclerAdapter(this.context!!, mutableListOf())
         rv_itemsList?.adapter = ira
         viewModel.items.observeForever {
             ira.itemlist.clear()
@@ -54,8 +55,22 @@ class itemListFragment : Fragment() {
             ira.notifyDataSetChanged()
             rv_itemsList.adapter = ira
         }
-//        btn_statistics.setOnClickListener {
-//            Log.d("RECYCLER VIEW","amount of items on display: ${ira.itemCount.toString()}, amount TO BE displayed: ${(viewModel.items.value as List<Item>).count().toString()}")
-//        }
+
+        sv_items!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // filter recycler view when query submitted
+                ira.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                // filter recycler view when text is changed
+                ira.filter.filter(query)
+                return false
+            }
+        })
+        btn_statistics.setOnClickListener {
+            Log.d("RECYCLER VIEW","amount of items on display: ${ira.itemCount.toString()}, amount TO BE displayed: ${(viewModel.items.value as List<Item>).count().toString()}")
+        }
     }
 }
