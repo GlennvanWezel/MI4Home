@@ -7,15 +7,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.items.manage.AddItemFragment">
 
-    <ImageView android:id="@+id/imageView_profilePicture"
-               android:layout_width="20dp"
-               android:layout_height="20dp"
-               app:layout_constraintTop_toTopOf="parent"
-               app:layout_constraintLeft_toLeftOf="parent"
-               android:contentDescription="@string/the_users_profile_picture"
-
-    />
-
     <TextView
             android:id="@+id/textView_errors"
             android:layout_width="wrap_content"
@@ -31,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView_profilePicture"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"/>
 
     <EditText
@@ -44,12 +35,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:hint="@string/itemnamehint"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_errors"
-            app:layout_constraintVertical_bias="0.0" android:inputType="text" android:autofillHints=""/>
+            app:layout_constraintBottom_toTopOf="@id/editText_value"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:inputType="text"
+            android:importantForAutofill="no"/>
 
     <EditText
             android:id="@+id/editText_value"
@@ -61,23 +52,26 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:hint="@string/value"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_select_a_room"
             app:layout_constraintTop_toBottomOf="@+id/editText_itemName"
-            app:layout_constraintVertical_bias="0.0" android:inputType="numberDecimal" android:autofillHints=""/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:inputType="numberDecimal"
+            android:importantForAutofill="no"/>
+
     <TextView
+            android:id="@+id/tv_select_a_room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/editText_value"
             app:layout_constraintBottom_toTopOf="@id/spinner_room"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/button_add_item"
+            app:layout_constraintRight_toRightOf="parent"
             android:text="@string/select_a_room"/>
+
     <Spinner
             android:id="@+id/spinner_room"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             app:layout_constraintWidth_percent="0.7"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -98,11 +92,11 @@
             app:layout_constraintTop_toBottomOf="@id/spinner_room"
             app:layout_constraintBottom_toTopOf="@id/spinner_type"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/button_add_item"
+            app:layout_constraintRight_toRightOf="parent"
             android:text="@string/select_a_type"/>
     <Spinner
             android:id="@+id/spinner_type"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             app:layout_constraintWidth_percent="0.7"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -118,20 +112,18 @@
             app:layout_constraintVertical_bias="0.123"/>
     <Button
             android:id="@+id/button_add_item"
-            android:layout_width="103dp"
-            android:layout_height="315dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="?colorAccent"
             android:text="@string/add_item"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/spinner_type"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/editText_itemName"
-            app:layout_constraintTop_toTopOf="@+id/editText_itemName"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintWidth_percent="0.25"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_type"
+            android:gravity="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

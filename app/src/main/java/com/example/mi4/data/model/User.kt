@@ -1,4 +1,4 @@
-package com.example.mi4.data.db.entity
+package com.example.mi4.data.model
 
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName

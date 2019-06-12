@@ -1,6 +1,6 @@
 package com.example.mi4.data.repository
 
-import com.example.mi4.data.db.entity.Item
+import com.example.mi4.data.model.Item
 
 interface ItemRepository {
     //suspend enables you to call a function from a corouting (Asynchronously)

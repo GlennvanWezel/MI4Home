@@ -17,4 +17,5 @@
     <string name="error_value_cannot_be_empty">Wrong input: must not be empty</string>
     <string name="error_name_cannot_be_empty">Wrong input: must not be empty</string>
     <string name="the_delete_button">The Delete Button</string>
+    <string name="statistics">Statistics</string>
 </resources>

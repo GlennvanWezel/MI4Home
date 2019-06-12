@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mi4.R
-import com.example.mi4.data.db.entity.Item
+import com.example.mi4.data.model.Item
 import com.example.mi4.data.repository.ItemRepositoryImpl
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
 import kotlinx.coroutines.GlobalScope

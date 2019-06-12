@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.mi4.R
+import com.example.mi4.data.model.Item
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.item_list_fragment.*
 import java.lang.Exception
@@ -42,9 +43,19 @@ class itemListFragment : Fragment() {
     }
 
     private fun initialiseUi() {
+        rv_itemsList.layoutManager = LinearLayoutManager(this.context)
+        val ira = ItemRecyclerAdapter(viewModel.items.value!!.toMutableList())
+        rv_itemsList?.adapter = ira
         viewModel.items.observeForever {
-            val ira = ItemRecyclerAdapter(it.toMutableList())
-            rv_itemsList?.adapter = ira
+            ira.itemlist.clear()
+            it.forEach {
+                ira.itemlist.add(it)
+            }
+            ira.notifyDataSetChanged()
+            rv_itemsList.adapter = ira
         }
+//        btn_statistics.setOnClickListener {
+//            Log.d("RECYCLER VIEW","amount of items on display: ${ira.itemCount.toString()}, amount TO BE displayed: ${(viewModel.items.value as List<Item>).count().toString()}")
+//        }
     }
 }

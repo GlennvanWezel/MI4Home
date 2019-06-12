@@ -1,6 +1,6 @@
 package com.example.mi4.data.repository
 
-import com.example.mi4.data.db.entity.Type
+import com.example.mi4.data.model.Type
 
 interface TypeRepository {
     //suspend enables you to call a function from a corouting (Asynchronously)

@@ -1,4 +1,4 @@
-package com.example.mi4.data.db.entity
+package com.example.mi4.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,7 +8,7 @@ data class Room (var amountOfItems: Int = 0,
                  var name: String = "Default",
                  var value: Double = 0.00){
     override fun toString(): String {
-        return "N: $name|#Items:$amountOfItems|$$value"
+        return "$name - #Items:$amountOfItems - $$value"
     }
 
     @PrimaryKey(autoGenerate = false)

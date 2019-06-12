@@ -12,13 +12,11 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.mi4.R
-import com.example.mi4.data.db.entity.Item
-import com.example.mi4.data.db.entity.Room
-import com.example.mi4.data.db.entity.Type
-import com.example.mi4.data.db.entity.User
-import com.example.mi4.ui.items.list.itemListFragment
+import com.example.mi4.data.model.Item
+import com.example.mi4.data.model.Room
+import com.example.mi4.data.model.Type
+import com.example.mi4.data.model.User
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore

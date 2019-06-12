@@ -1,15 +1,12 @@
 package com.example.mi4.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.mi4.data.db.entity.Item
-import com.example.mi4.data.db.entity.User
-import com.example.mi4.ui.items.list.itemListFragment
+import com.example.mi4.data.model.Item
+import com.example.mi4.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Source
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -17,16 +14,14 @@ import kotlinx.coroutines.tasks.await
 
 class ItemRepositoryImpl : ItemRepository {
 
-    private var itemsList = MutableLiveData<List<Item>>()
+    private var itemsList = mutableListOf<Item>()
+    private var items = MutableLiveData<List<Item>>()
 
-    var items: LiveData<List<Item>>
-        get() {
-            return itemsList
-        }
+    fun getitems() = items as LiveData<List<Item>>
 
 
     init {
-        items = itemsList
+        items.value = itemsList
         val fbinstance = FirebaseAuth.getInstance()
         fbinstance.addAuthStateListener {
             if (it.currentUser != null) {
@@ -34,8 +29,8 @@ class ItemRepositoryImpl : ItemRepository {
                     getCurrentItems()
                 }
             } else if (it.currentUser == null) {
-                itemsList = MutableLiveData<List<Item>>()
-                items = itemsList
+                itemsList = mutableListOf<Item>()
+                items.value = itemsList
             }
         }
     }
@@ -75,15 +70,15 @@ class ItemRepositoryImpl : ItemRepository {
     }
 
     override suspend fun getCurrentItems() {
-        itemsList.postValue(FirebaseFirestore
+        itemsList = (FirebaseFirestore
             .getInstance()
             .collection("users")
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .get()
             .await()
             .toObject(User::class.java)!!
-            .items)
-        items = itemsList
+            .items).toMutableList()
+        items.postValue(itemsList)
     }
 
     //endregion

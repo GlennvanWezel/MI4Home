@@ -2,8 +2,8 @@ package com.example.mi4.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.mi4.data.db.entity.Room
-import com.example.mi4.data.db.entity.User
+import com.example.mi4.data.model.Room
+import com.example.mi4.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore

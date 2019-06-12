@@ -1,5 +1,6 @@
 package com.example.mi4.ui.items.manage
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,11 +10,10 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.mi4.R
-import com.example.mi4.data.db.entity.Item
-import com.example.mi4.data.db.entity.Room
-import com.example.mi4.data.db.entity.Type
+import com.example.mi4.data.model.Item
+import com.example.mi4.data.model.Room
+import com.example.mi4.data.model.Type
 import kotlinx.android.synthetic.main.add_item_fragment.*
-import kotlinx.android.synthetic.main.add_item_fragment.view.*
 
 class AddItemFragment : Fragment() {
 
@@ -42,26 +42,37 @@ class AddItemFragment : Fragment() {
 
     private fun initializeUi(){
 
+        val roomsArrayAdaptersObserver =
+            ArrayAdapter<Room>(
+                this.context!!,
+                R.layout.support_simple_spinner_dropdown_item
+            )
         viewModel.rooms.observeForever {
-            val arrayAdaptersObserver =
-                ArrayAdapter<Room>(
-                    this.context!!,
-                    R.layout.support_simple_spinner_dropdown_item,
-                    it
-                )
-            this.spinner_room?.adapter = arrayAdaptersObserver
+            roomsArrayAdaptersObserver.clear()
+            it.forEach {
+                roomsArrayAdaptersObserver.add(it)
+            }
+            //spinner_room.invalidate()
         }
+        spinner_room.adapter = roomsArrayAdaptersObserver
 
+        val typesArrayAdaptersObserver =
+            ArrayAdapter<Type>(
+                this.context!!,
+                R.layout.support_simple_spinner_dropdown_item
+            )
 
         viewModel.types.observeForever {
-            val arrayAdaptersObserver =
-                ArrayAdapter<Type>(
-                    this.context!!,
-                    R.layout.support_simple_spinner_dropdown_item,
-                    it
-                )
-            this.spinner_type?.adapter = arrayAdaptersObserver
+            typesArrayAdaptersObserver.clear()
+            it.forEach {
+                typesArrayAdaptersObserver.add(it)
+            }
+            //spinner_type.invalidate()
+            //spinner_type.setSelection(-1)
+            //spinner_type.setSelection(spinner_type.selectedItemPosition)
+            //TODO: zorg er voor dat de spinner geupdate wordt , momenteel ziet men enkel de verandering in het type wnr men op de spinner klikt
         }
+        this.spinner_type?.adapter = typesArrayAdaptersObserver
 
 
 
@@ -77,7 +88,7 @@ class AddItemFragment : Fragment() {
                         editText_value.text.toString().toDouble()
                     } else 0.00
                 )
-                viewModel.addItem(item)
+                viewModel.addItem(item, (spinner_room.selectedItem as Room), (spinner_type.selectedItem as Type))
                 editText_itemName.setText("")
                 editText_value.setText("")
             }

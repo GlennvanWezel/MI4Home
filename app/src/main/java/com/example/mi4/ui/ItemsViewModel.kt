@@ -1,7 +1,7 @@
 package com.example.mi4.ui
 
 import androidx.lifecycle.ViewModel
-import com.example.mi4.data.db.entity.Item
+import com.example.mi4.data.model.Item
 import com.example.mi4.data.repository.ItemRepositoryImpl
 
 class ItemsViewModel(private val itemRepository: ItemRepositoryImpl) : ViewModel() {
