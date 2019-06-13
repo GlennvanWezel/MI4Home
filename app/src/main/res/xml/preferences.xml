@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/language">
+
+        <SwitchPreference
+                android:defaultValue="true"
+                android:title="Switch preference" android:key="switch_language_preference"
+                android:summaryOn="@string/english"
+                android:summaryOff="@string/dutch" android:switchTextOff="@string/dutch"
+                android:switchTextOn="@string/english"/>
+    </PreferenceCategory>
+</PreferenceScreen>

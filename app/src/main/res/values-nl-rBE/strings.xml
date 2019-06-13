@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Inventorizer</string>
+    <string name="add_item">Voorwerp toevoegen</string>
+    <string name="enter_a_name">Voeg een naam in:</string>
+    <string name="error_name_cannot_be_empty">error: mag niet leeg zijn</string>
+    <string name="error_select_a_room">Selecteer een Kamer!</string>
+    <string name="error_select_a_type">Selecteer een Categorie!</string>
+    <string name="error_value_cannot_be_empty">error: mag niet leeg zijn</string>
+    <string name="item_error_nameempty">Naam mag niet leeg zijn</string>
+    <string name="item_error_valueempty">Waarde mag niet leeg zijn</string>
+    <string name="itemnamehint">Naam</string>
+    <string name="move_assigned_items_to_other_room_type">Verplaats gelinkte voorwerpen naar andere Kamer/Categorie</string>
+    <string name="select_a_room">Kamer:</string>
+    <string name="select_a_type">Categorie:</string>
+    <string name="spinnerRoomHint">Kamer</string>
+    <string name="spinnertypehint">Categorie(bv Meubels)</string>
+    <string name="statistics">Statistieken</string>
+    <string name="the_delete_button">De Delete Knop</string>
+    <string name="value">Waarde</string>
+    <string name="language">Taal</string>
+    <string name="english">Engels</string>
+    <string name="dutch">Nederands</string>
+    <string name="settings">Instellingen</string>
+
+</resources>

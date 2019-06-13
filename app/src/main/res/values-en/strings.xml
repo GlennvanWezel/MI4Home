@@ -1,22 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Inventorizer</string>
-    <string name="itemnamehint">Name</string>
-    <string name="value">Value</string>
-    <string name="spinnerRoomHint">Room</string>
-    <string name="spinnertypehint">Type (e.g. electronics)</string>
     <string name="add_item">Add Item</string>
-    <string name="select_a_room">Room:</string>
-    <string name="select_a_type">Type:</string>
+    <string name="enter_a_name">Enter a name:</string>
+    <string name="error_name_cannot_be_empty">Wrong input: must not be empty</string>
     <string name="error_select_a_room">Select a Room!</string>
     <string name="error_select_a_type">Select a Type!</string>
     <string name="error_value_cannot_be_empty">Wrong input: must not be empty</string>
-    <string name="error_name_cannot_be_empty">Wrong input: must not be empty</string>
-    <string name="the_delete_button">The Delete Button</string>
-    <string name="statistics">Statistics</string>
-    <string name="enter_a_name">Enter a name:</string>
     <string name="item_error_nameempty">Name cannot be empty</string>
     <string name="item_error_valueempty">Value must not be empty</string>
+    <string name="itemnamehint">Name</string>
     <string name="move_assigned_items_to_other_room_type">Move assigned items to other room/type?</string>
+    <string name="select_a_room">Room:</string>
+    <string name="select_a_type">Type:</string>
+    <string name="spinnerRoomHint">Room</string>
+    <string name="spinnertypehint">Type (e.g. electronics)</string>
+    <string name="statistics">Statistics</string>
+    <string name="the_delete_button">The Delete Button</string>
+    <string name="value">Value</string>
     <string name="language">Language</string>
     <string name="english">English</string>
     <string name="dutch">Dutch</string>
