@@ -3,9 +3,11 @@
 ### Zie vorig logboek: https://github.com/GlennvanWezel/HomeInventorizer/blob/master/logboek.md (U heeft hier toegang toe!)
 #### uit zekerheid zal ik dat logboek hier copy pasten:
 
-# TOTAAL AANTAL UREN ZOWEL PRE-MVVM ALS POST-MVVM: 
+# TOTAAL AANTAL UREN ZOWEL PRE-MVVM ALS POST-MVVM: 152 uren
 
 # LOGBOEK PRE-MVVM : 46.6 uren
+
+# LOGBOEK POST-MVVM: 106 uren
 
 # HomeInventorizer
 Private Home inventory project (application)
@@ -67,5 +69,92 @@ Private Home inventory project (application)
 # LOGBOEK POST-MVVM
 
 
-### Woensdag 17/04/2019
+### Woensdag 17/04/2019 - 7.75u
 * MVVM Reso Coder tutorial bekijken (playlist: https://www.youtube.com/watch?v=yDaaM3u389I&list=PLB6lc7nQ1n4jTLDyU2muTBo8xk0dg0D_w ) - 2.75u
+* MVVM structuur prepareren adhv tutorials - 3u
+* MVVM bijsnoeien zodat het past met mijn project - 2u
+
+
+### Donderdag 18/04/2019 - 1.5u
+* Verderwerken aan MVVM patroon adhv nog een ander tutorial van Reso Coder - 1.5u
+
+### Maandag 21/04/2019 - 2.5u
+* Skeleton vervoledigen - 2u
+* Navigation Schema maken - 0.5u
+
+### Donderdag 24/04/2019 - 3u
+* Add-Item pagina aanpassen/vervolledigen - 3u
+
+### Woensdag 1/05/2019 - 7u
+* Login fixen - 2u
+* DIt was allemaal nutteloos want uiteindelijk gebruik ik toch gewoon de AuthUI.... - 5u
+
+### Donderdag 02/05/2019 - 4u
+* Entities (Models), DAO's, en Room database gemaakt - 4u
+
+### Vrijdag 03/05/2019 - 5u
+* Login systeem vervangen met FirebaseAuthUI - 3u
+* nutteloos opzoekwerk om proberen te vinden hoe men de FIrebaseUI kan stylen - 2u
+
+### Maandag 06/05/2019 - 5u
+* Poging om verder MVVM structuur toe te passen door een firebaseservice klasse enzo aan te maken adhv reso coder tutorial - 5u
+
+## TIJDENS DEZE DROP IN ACTIVITEIT KWAMEN ALLE DEADLINES VAN AD4, DD4, EN SE4 ER AAN EN MOEST IK ME DAAROP FOCUSEN
+
+### Zaterdag 01/06/2019 - 6u
+* uittesten van firestore - 2u
+* opzoeken en bekijken van firestore tutorials - 3u
+* rondspelen met firebase firestore DB om te testen hoe ik het best mijn objecten er in zou opslaan - 1u
+
+### Zondag 02/06/2019 - 4u
+* verder gesukkel met firestore - 2u
+* verder gesukkel met MVVM sturctuur en het feit dat ik 2 verschillende tutorials door elkaar had toegepast - 2u
+
+### Woensdag 05/06/2019 - 5u
+* Database entities aanpasse - 1u
+* poging om logout functie te creeeren - 0.5u
+* Repo's verder aanvullen - 2u
+* achterhalen in welke volgorde de viewmodellen, fragmenten gecreerd worden - 1.5u
+
+### Donderdag 06/06/2019 - 2u
+* ook repository gemaakt voor de Room en Type klassen uiteindelijk - 2u
+
+### Zaterdag 08/06/2019 - 9u
+* Goed in gang geschoten, te veel dinge om in detail te beschrijven maar in het algemeen de applicatie verbeterd en functionaliteiten toegevoegd - 5u
+** functionaliteit: items kunnen toevoegen - 3u
+** functionaliteit: items kunnen verwijderen -2u
+* Opzoekwerk over Recyclerviews en hoe men er een maakt - 3u
+* Recyclerview implementeren en opvullen met de items uit de DB - 1u
+
+### Zondag 09/06/2019 - 9u
+* project opschonen, onnodige bestanden wegdoen, dode code verwijderen, imports optimaliseren, etc - 2u
+* HEEL IRRITANTE ERROR: ik verwijderde de app op mn gsm wanneer de kabel nog aangesloten was, en dan wanneer ik nogmaals de app doe runnen krijg ik type 3 error "Main Activity not found" also mijn ItemsActivity ni bestaat!!!!! - 5u
+* mergen - 0.5u
+* misc veranderingen -1.5u
+
+### Maandag 10/06/2019 - 5u
+* repositories verder aanvullen - 2u
+* LiveData beter toepassen zodat de app reatiever is - 3u
+
+### Woensdag 12/06/2019 - 18u
+* Bug hunting - 6u
+* repositories uitbreiding met getters voor livedata - 1u
+* refactoring - 1u
+* oplossingen zoeken en toepassen voor het feit dat de recyclerview geen items meer toonde - 2u
+* Icoon van app en naam van app fixen - 2u
+* Functionaliteit toevoegen en afronden:
+** kamer/type toevoegen - 3u
+* kleur schema veranderen - 1u
+* layout verbeteren - 2u
+ 
+
+### Donderdag 13/06/2019 - 11.5u
+* layout verbeteren - 4u
+* functionaliteiten toevoegen:
+** verwijderen van kamer - 3u
+** verwijderen van type - 3u
+* wegwerken van warnings - 0.5u
+* logboek aanvullen - 1u
+
+
+
