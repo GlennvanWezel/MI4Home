@@ -7,5 +7,5 @@ interface TypeRepository {
     suspend fun getCurrentTypes()
     suspend fun deleteType(type: Type)
     suspend fun addType(type:Type)
-    suspend fun updateType(oldType: Type,newType: Type)
+   // suspend fun updateType(oldType: Type,newType: Type)
 }

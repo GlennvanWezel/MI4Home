@@ -21,7 +21,7 @@ class TypeRepositoryImpl : TypeRepository {
     var types = MutableLiveData<List<Type>>()
 
     fun getTypes(): LiveData<List<Type>> {
-        return typesList as LiveData<List<Type>>
+        return types as LiveData<List<Type>>
     }
 
     init {
@@ -53,9 +53,14 @@ class TypeRepositoryImpl : TypeRepository {
         add(type)
     }
 
-    override suspend fun updateType(oldType: Type, newType: Type) {
-        deleteType(oldType)
-        addType(newType)
+     suspend fun updateType(type: Type) {
+         typesList[typesList.indexOf(type)] = type
+        FirebaseFirestore
+            .getInstance()
+            .collection("users")
+            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .update("types", typesList)
+            .await()
     }
 
 
@@ -77,8 +82,8 @@ class TypeRepositoryImpl : TypeRepository {
 
     //region helper methods
     private fun add(type: Type) {
-        typesList.add(type)
-        types.postValue(typesList)
+//        typesList.add(type)
+//        types.postValue(typesList)
         GlobalScope.launch(Dispatchers.IO){
             FirebaseFirestore
                 .getInstance()
@@ -86,6 +91,11 @@ class TypeRepositoryImpl : TypeRepository {
                 .document(FirebaseAuth.getInstance().currentUser!!.uid)
                 .update("types", FieldValue.arrayUnion(type))
                 .await()
+        }
+    }
+    fun getType(name: String) : Type?{
+        return typesList.find {
+            it.name == name
         }
     }
 

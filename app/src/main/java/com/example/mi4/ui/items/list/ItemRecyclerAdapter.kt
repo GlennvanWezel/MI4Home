@@ -24,8 +24,11 @@ import kotlinx.coroutines.launch
  * bron: https://www.youtube.com/watch?v=jS0buQyfJfs
  * channel: Let's Build that app
  * video title: Kotlin Youtube: Intro to RecyclerView (Ep 1)
+ *
+ * Inspiratie en source voor the filteren van de recyclerview items komt van deze blogpost:
+ * https://kotlincourses.com/searchview-filter-recyclerview-kotlin/
  */
-class ItemRecyclerAdapter(private val context: Context, val itemlist : MutableList<Item>) : RecyclerView.Adapter<CustomViewHolder>(), Filterable {
+class ItemRecyclerAdapter(private val context: Context, val itemlist : MutableList<Item>, val viewmodel: ItemListViewModel) : RecyclerView.Adapter<CustomViewHolder>(), Filterable {
 
     var itemSearchList: List<Item>? = null
 
@@ -77,7 +80,7 @@ class ItemRecyclerAdapter(private val context: Context, val itemlist : MutableLi
             holder.view.itemValue.text = item.waarde.toString()
             holder.view.ib_deleteitem.setOnClickListener {
                 GlobalScope.launch{
-                    ItemRepositoryImpl().deleteItem(item)
+                    viewmodel.deleteItem(item)
                 }
                 itemlist.removeAt(position)
                 notifyItemRemoved(position)

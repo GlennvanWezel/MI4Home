@@ -7,5 +7,5 @@ interface RoomRepository {
     suspend fun getCurrentRooms()
     suspend fun deleteRoom(room: Room)
     suspend fun addRoom(room:Room)
-    suspend fun updateRoom(oldRoom: Room,newRoom: Room)
+   // suspend fun updateRoom(oldRoom: Room,newRoom: Room)
 }

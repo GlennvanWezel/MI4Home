@@ -64,13 +64,9 @@ class AddItemFragment : Fragment() {
 
         viewModel.types.observeForever {
             typesArrayAdaptersObserver.clear()
-            it.forEach {
-                typesArrayAdaptersObserver.add(it)
-            }
-            //spinner_type.invalidate()
-            //spinner_type.setSelection(-1)
-            //spinner_type.setSelection(spinner_type.selectedItemPosition)
-            //TODO: zorg er voor dat de spinner geupdate wordt , momenteel ziet men enkel de verandering in het type wnr men op de spinner klikt
+            typesArrayAdaptersObserver.notifyDataSetChanged()
+            typesArrayAdaptersObserver.addAll(it.toMutableList())
+            typesArrayAdaptersObserver.notifyDataSetChanged()
         }
         this.spinner_type?.adapter = typesArrayAdaptersObserver
 

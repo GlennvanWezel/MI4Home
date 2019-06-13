@@ -14,15 +14,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class RoomRepositoryImpl : RoomRepository {
-    private var roomsList = MutableLiveData<List<Room>>()
+    private var roomsList = mutableListOf<Room>()
 
-    var rooms: LiveData<List<Room>>
-        get() {
-            return roomsList as LiveData<List<Room>>
-        }
+    var rooms = MutableLiveData<List<Room>>()
+
+    fun getRooms(): LiveData<List<Room>> {
+        return rooms as LiveData<List<Room>>
+    }
 
     init {
-        rooms = roomsList
+        rooms.postValue(roomsList)
         val fbinstance = FirebaseAuth.getInstance()
         fbinstance.addAuthStateListener {
             if (it.currentUser != null) {
@@ -30,26 +31,22 @@ class RoomRepositoryImpl : RoomRepository {
                     getCurrentRooms()
                 }
             } else if (it.currentUser == null) {
-                roomsList = MutableLiveData()
-                rooms = roomsList
+                roomsList = mutableListOf<Room>()
+                rooms.postValue(roomsList)
             }
         }
     }
 
     //region CRUD METHODS
-    override suspend fun updateRoom(oldRoom: Room, newRoom: Room) {
+     suspend fun updateRoom(room: Room) {
+        roomsList[roomsList.indexOf(room)] = room
         FirebaseFirestore
             .getInstance()
             .collection("users")
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
-            .update("rooms", FieldValue.arrayRemove(oldRoom))
+            .update("rooms",roomsList)
             .await()
-        FirebaseFirestore
-            .getInstance()
-            .collection("users")
-            .document(FirebaseAuth.getInstance().currentUser!!.uid)
-            .update("rooms", FieldValue.arrayUnion(newRoom))
-            .await()
+
     }
 
     override suspend fun deleteRoom(room: Room) {
@@ -61,7 +58,7 @@ class RoomRepositoryImpl : RoomRepository {
             .await()
     }
 
-    override suspend fun addRoom(room: Room){
+    override suspend fun addRoom(room: Room) {
         FirebaseFirestore
             .getInstance()
             .collection("users")
@@ -71,17 +68,26 @@ class RoomRepositoryImpl : RoomRepository {
     }
 
     override suspend fun getCurrentRooms() {
-        roomsList.postValue(FirebaseFirestore
-            .getInstance()
-            .collection("users")
-            .document(FirebaseAuth.getInstance().currentUser!!.uid)
-            .get(Source.CACHE)
-            .await()
-            .toObject(User::class.java)!!
-            .rooms)
-        rooms = roomsList
+        roomsList = (
+                FirebaseFirestore
+                    .getInstance()
+                    .collection("users")
+                    .document(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .get(Source.CACHE)
+                    .await()
+                    .toObject(User::class.java)!!
+                    .rooms
+                ).toMutableList()
+        rooms.postValue(roomsList)
     }
 //endregion
+
+
+    fun getRoom(name: String): Room? {
+        return roomsList.find {
+            it.name == name
+        }
+    }
 
     companion object {
         @Volatile

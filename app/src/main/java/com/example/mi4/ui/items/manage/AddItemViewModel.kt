@@ -24,16 +24,16 @@ class AddItemViewModel : ViewModel() {
 
     init {
         items = itemsRepo.getitems()
-        rooms = roomsRepo.rooms // TODO: Change to .getrooms()
-        types = typesRepo.types // TODO: change to .gettypes()
+        rooms = roomsRepo.getRooms() // TODO: Change to .getrooms()
+        types = typesRepo.getTypes() // TODO: change to .gettypes()
         itemsRepo.getitems().observeForever {
             items = itemsRepo.getitems()
         }
         typesRepo.types.observeForever {
-            types = typesRepo.types // TODO: change to .gettypes()
+            types = typesRepo.getTypes() // TODO: change to .gettypes()
         }
         roomsRepo.rooms.observeForever {
-            rooms = roomsRepo.rooms // TODO: Change to .getrooms()
+            rooms = roomsRepo.getRooms() // TODO: Change to .getrooms()
         }
     }
 
@@ -49,8 +49,8 @@ class AddItemViewModel : ViewModel() {
         type.value += item.waarde
 
         GlobalScope.launch(Dispatchers.IO){
-            roomsRepo.updateRoom(oldroom,room)
-            typesRepo.updateType(oldtype,type)
+            roomsRepo.updateRoom(room)
+            typesRepo.updateType(type)
         }
         itemsRepo.addItem(item)
 
@@ -67,5 +67,15 @@ class AddItemViewModel : ViewModel() {
         GlobalScope.launch(Dispatchers.IO){
             typesRepo.addType(type)
         }
+    }
+
+    companion object {
+        @Volatile
+        private var instance: AddItemViewModel? = null
+
+        fun invoke() =
+            instance ?: synchronized(this) {
+                instance ?: AddItemViewModel().also { instance = it }
+            }
     }
 }
