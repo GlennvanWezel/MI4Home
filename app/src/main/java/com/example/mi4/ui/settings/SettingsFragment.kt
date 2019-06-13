@@ -12,8 +12,8 @@ class SettingsFragment : PreferenceFragmentCompat(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (activity as AppCompatActivity)?.supportActionBar?.title = getString(R.string.settings)
-        (activity as AppCompatActivity)?.supportActionBar?.subtitle = null
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.settings)
+        (activity as AppCompatActivity).supportActionBar?.subtitle = null
 
     }
 

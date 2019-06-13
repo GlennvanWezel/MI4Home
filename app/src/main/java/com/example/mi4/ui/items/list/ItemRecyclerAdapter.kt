@@ -31,7 +31,7 @@ class ItemRecyclerAdapter(private val context: Context, val itemlist : MutableLi
 
     override fun getFilter(): Filter {
         return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence): Filter.FilterResults {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
                 val charString = charSequence.toString()
                 if (charString.isEmpty()) {
                    itemSearchList= itemlist
@@ -44,11 +44,12 @@ class ItemRecyclerAdapter(private val context: Context, val itemlist : MutableLi
                     }
                    itemSearchList= filteredList
                 }
-                val filterResults = Filter.FilterResults()
+                val filterResults = FilterResults()
                 filterResults.values = itemSearchList
                 return filterResults
             }
-            override fun publishResults(charSequence: CharSequence, filterResults: Filter.FilterResults) {
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
                itemSearchList= filterResults.values as ArrayList<Item>
                 notifyDataSetChanged()
             }
