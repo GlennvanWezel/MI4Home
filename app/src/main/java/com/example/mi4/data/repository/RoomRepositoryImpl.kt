@@ -46,6 +46,7 @@ class RoomRepositoryImpl : RoomRepository {
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .update("rooms",roomsList)
             .await()
+        rooms.postValue(roomsList)
 
     }
 
@@ -56,6 +57,8 @@ class RoomRepositoryImpl : RoomRepository {
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .update("rooms", FieldValue.arrayRemove(room))
             .await()
+        roomsList.remove(room)
+        rooms.postValue(roomsList)
     }
 
     override suspend fun addRoom(room: Room) {
@@ -65,6 +68,8 @@ class RoomRepositoryImpl : RoomRepository {
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .update("rooms", FieldValue.arrayUnion(room))
             .await()
+        roomsList.add(room)
+        rooms.postValue(roomsList)
     }
 
     override suspend fun getCurrentRooms() {

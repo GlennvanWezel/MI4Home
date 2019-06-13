@@ -94,6 +94,27 @@ class ItemRepositoryImpl : ItemRepository {
         items.postValue(itemsList)
     }
 
+     fun getAllItemsByRoom(name:String) : List<Item>{
+        var result = mutableListOf<Item>()
+        itemsList.forEach {
+            if(it.kamer == name)
+                result.add(it)
+        }
+        return result
+    }
+
+
+    fun getAllItemsByType(name:String) : List<Item>{
+        var result = mutableListOf<Item>()
+        itemsList.forEach {
+            if(it.type == name)
+                result.add(it)
+        }
+        return result
+    }
+
+
+
     //endregion
 
     companion object {

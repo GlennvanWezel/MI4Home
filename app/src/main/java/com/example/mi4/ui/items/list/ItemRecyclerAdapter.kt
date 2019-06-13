@@ -1,7 +1,6 @@
 package com.example.mi4.ui.items.list
 
 import android.content.Context
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mi4.R
 import com.example.mi4.data.model.Item
-import com.example.mi4.data.repository.ItemRepositoryImpl
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -100,3 +97,4 @@ class ItemRecyclerAdapter(private val context: Context, val itemlist : MutableLi
 class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
 }
+

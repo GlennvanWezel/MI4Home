@@ -47,6 +47,8 @@ class TypeRepositoryImpl : TypeRepository {
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .update("types", FieldValue.arrayRemove(type))
             .await()
+        typesList.remove(type)
+        types.postValue(typesList)
     }
 
     override suspend fun addType(type: Type) {
@@ -61,6 +63,7 @@ class TypeRepositoryImpl : TypeRepository {
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .update("types", typesList)
             .await()
+         types.postValue(typesList)
     }
 
 
@@ -82,8 +85,8 @@ class TypeRepositoryImpl : TypeRepository {
 
     //region helper methods
     private fun add(type: Type) {
-//        typesList.add(type)
-//        types.postValue(typesList)
+        typesList.add(type)
+        types.postValue(typesList)
         GlobalScope.launch(Dispatchers.IO){
             FirebaseFirestore
                 .getInstance()

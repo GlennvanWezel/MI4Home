@@ -1,22 +1,16 @@
 package com.example.mi4.ui.items.list
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
 import android.widget.SearchView
+import androidx.core.view.doOnNextLayout
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-
 import com.example.mi4.R
-import com.example.mi4.data.model.Item
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.item_list_fragment.*
-import java.lang.Exception
 
 class itemListFragment : Fragment() {
 
@@ -39,21 +33,40 @@ class itemListFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(ItemListViewModel::class.java)
         // TODO: Use the ViewModel
+        rv_itemsList.visibility = View.INVISIBLE
         initialiseUi()
 
     }
 
+    fun showLoading() {
+        progressbar.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        progressbar.visibility = View.GONE
+    }
+
     private fun initialiseUi() {
-        rv_itemsList.layoutManager = LinearLayoutManager(this.context)
-        val ira = ItemRecyclerAdapter(this.context!!, mutableListOf(),viewModel)
+        showLoading()
+
+        rv_itemsList.layoutManager = LinearLayoutManager(context)
+
+        val ira = ItemRecyclerAdapter(context!!, mutableListOf(), viewModel)
         rv_itemsList?.adapter = ira
+
+        rv_itemsList.doOnNextLayout {
+            hideLoading()
+            rv_itemsList.visibility = View.VISIBLE
+        }
+
+
         viewModel.items.observeForever {
             ira.itemlist.clear()
             it.forEach {
                 ira.itemlist.add(it)
             }
             ira.notifyDataSetChanged()
-            rv_itemsList.adapter = ira
+            rv_itemsList?.adapter = ira
         }
 
         sv_items!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -70,7 +83,8 @@ class itemListFragment : Fragment() {
             }
         })
         btn_statistics.setOnClickListener {
-            Log.d("RECYCLER VIEW","amount of items on display: ${ira.itemCount.toString()}, amount TO BE displayed: ${(viewModel.items.value as List<Item>).count().toString()}")
+
         }
+
     }
 }

@@ -1,7 +1,6 @@
 package com.example.mi4.ui.items.manage
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mi4.data.model.Item
 import com.example.mi4.data.model.Room
@@ -39,9 +38,6 @@ class AddItemViewModel : ViewModel() {
 
 
     fun addItem(item: Item,room: Room, type: Type) {
-        val oldroom = room.copy()
-        val oldtype = type.copy()
-
         room.amountOfItems += 1
         type.amountOfItems += 1
 
@@ -63,9 +59,54 @@ class AddItemViewModel : ViewModel() {
         }
     }
 
+    fun addRoom(name: String){
+        val room = Room(0,name,0.00)
+        GlobalScope.launch(Dispatchers.IO){
+            roomsRepo.addRoom(room)
+        }
+    }
+
     fun addType(type: Type){
         GlobalScope.launch(Dispatchers.IO){
             typesRepo.addType(type)
+        }
+    }
+    fun addType(name: String){
+        val type = Type(0,name,0.00)
+        GlobalScope.launch(Dispatchers.IO){
+            typesRepo.addType(type)
+        }
+    }
+
+    fun deleteType(typeToDelete: Type, moveAttachedItems: Boolean, typeToMoveTo: Type?){
+        if(!moveAttachedItems){
+            //get all the items associated with this type
+            var items = itemsRepo.getAllItemsByType(typeToDelete.name)
+            //delete all the items collected above
+            GlobalScope.launch {
+                items.forEach {
+                    itemsRepo.deleteItem(it)
+                }
+                //delete the type
+                typesRepo.deleteType(typeToDelete)
+            }
+        }
+        
+    }
+
+    fun deleteRoom(roomToDelete: Room, moveAttachedItems : Boolean, roomToMoveTo: Room?){
+        if(!moveAttachedItems){
+            //get all the items associated with this room
+            var items = itemsRepo.getAllItemsByRoom(roomToDelete.name)
+            //delete all the items collected above
+            GlobalScope.launch {
+                items.forEach {
+                    itemsRepo.deleteItem(it)
+                }
+                //delete the room
+                roomsRepo.deleteRoom(roomToDelete)
+            }
+
         }
     }
 

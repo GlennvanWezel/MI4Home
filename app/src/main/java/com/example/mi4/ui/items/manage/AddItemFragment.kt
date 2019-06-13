@@ -1,12 +1,14 @@
 package com.example.mi4.ui.items.manage
 
-import android.app.Application
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.mi4.R
@@ -14,6 +16,14 @@ import com.example.mi4.data.model.Item
 import com.example.mi4.data.model.Room
 import com.example.mi4.data.model.Type
 import kotlinx.android.synthetic.main.add_item_fragment.*
+import kotlinx.android.synthetic.main.alert_dialog.view.*
+import kotlinx.android.synthetic.main.alert_dialog_delete.*
+import kotlinx.android.synthetic.main.alert_dialog_delete.view.*
+import kotlin.collections.Map
+import kotlin.collections.forEach
+import kotlin.collections.getValue
+import kotlin.collections.mutableMapOf
+import kotlin.collections.set
 
 class AddItemFragment : Fragment() {
 
@@ -52,7 +62,7 @@ class AddItemFragment : Fragment() {
             it.forEach {
                 roomsArrayAdaptersObserver.add(it)
             }
-            //spinner_room.invalidate()
+            spinner_room.invalidate()
         }
         spinner_room.adapter = roomsArrayAdaptersObserver
 
@@ -64,11 +74,90 @@ class AddItemFragment : Fragment() {
 
         viewModel.types.observeForever {
             typesArrayAdaptersObserver.clear()
-            typesArrayAdaptersObserver.notifyDataSetChanged()
-            typesArrayAdaptersObserver.addAll(it.toMutableList())
-            typesArrayAdaptersObserver.notifyDataSetChanged()
+            it.forEach {
+                typesArrayAdaptersObserver.add(it)
+            }
+            spinner_type.invalidate()
         }
         this.spinner_type?.adapter = typesArrayAdaptersObserver
+
+        btn_addRoom.setOnClickListener {
+            val view = LayoutInflater.from(context).inflate(R.layout.alert_dialog, null)
+            val builder = AlertDialog.Builder(this.context)
+            builder.setView(view)
+            builder.setCancelable(false)
+                .setPositiveButton("OK",DialogInterface.OnClickListener { _, _ ->
+                    viewModel.addRoom(view.editTextDialogUserInput.text.toString())
+                })
+                .setNegativeButton("Cancel",  DialogInterface.OnClickListener { _, _ ->
+                    //do nothing
+                })
+            val dialog = builder.create()
+            dialog.show()
+        }
+
+        btn_addType.setOnClickListener {
+            val view = LayoutInflater.from(context).inflate(R.layout.alert_dialog, null)
+            var builder = AlertDialog.Builder(this.context)
+            builder.setView(view)
+            builder.setCancelable(false)
+                .setPositiveButton("OK",DialogInterface.OnClickListener { _, _ ->
+                    viewModel.addType(view.editTextDialogUserInput.text.toString())
+                })
+                .setNegativeButton("Cancel",  DialogInterface.OnClickListener { _, _ ->
+                    //do nothing
+                })
+            val dialog = builder.create()
+            dialog.show()
+        }
+        btn_delete_room.setOnClickListener {
+            val view = LayoutInflater.from(context).inflate(R.layout.alert_dialog_delete, null)
+            view.spinner.adapter = roomsArrayAdaptersObserver
+            view.spinner_new.adapter = roomsArrayAdaptersObserver
+            view.chk_should_attached_items_be_moved.setOnCheckedChangeListener { buttonView, isChecked ->
+                view.spinner_new?.isEnabled = isChecked
+            }
+            var builder = AlertDialog.Builder(this.context)
+            builder.setView(view)
+            builder.setCancelable(false)
+                .setPositiveButton("OK",DialogInterface.OnClickListener { dialog, id ->
+                    if(view.spinner_new.selectedItemPosition == view.spinner.selectedItemPosition && view.chk_should_attached_items_be_moved.isChecked)
+                    {
+                        Toast.makeText(this.context,"Cannot select the room/type for transfer that you are going to delete!", Toast.LENGTH_LONG).show()
+                        dialog.cancel()
+                    }
+                    viewModel.deleteRoom(view.spinner.selectedItem as Room, view.chk_should_attached_items_be_moved.isChecked, view.spinner_new.selectedItem as Room?)
+                })
+                .setNegativeButton("Cancel",  DialogInterface.OnClickListener { _, _ ->
+
+                })
+            val dialog = builder.create()
+            dialog.show()
+        }
+
+        btn_delete_type.setOnClickListener {
+            val view = LayoutInflater.from(context).inflate(R.layout.alert_dialog_delete, null)
+            view.spinner.adapter = typesArrayAdaptersObserver
+            view.spinner_new.adapter = typesArrayAdaptersObserver
+            view.chk_should_attached_items_be_moved.setOnCheckedChangeListener { buttonView, isChecked ->
+                view.spinner_new?.isEnabled = isChecked
+            }
+            var builder = AlertDialog.Builder(this.context)
+            builder.setView(view)
+            builder.setCancelable(false)
+                .setPositiveButton("OK",DialogInterface.OnClickListener { _, _ ->
+                    var typeToMoveTo : Type? = null
+                    if(view.chk_should_attached_items_be_moved.isChecked){
+                        typeToMoveTo = spinner_new.selectedItem as Type?
+                    }
+                    viewModel.deleteType(view.spinner.selectedItem as Type,view.chk_should_attached_items_be_moved.isChecked, typeToMoveTo)
+                })
+                .setNegativeButton("Cancel",  DialogInterface.OnClickListener { _, _ ->
+                    //do nothing
+                })
+            val dialog = builder.create()
+            dialog.show()
+        }
 
 
 
@@ -89,20 +178,31 @@ class AddItemFragment : Fragment() {
                 editText_value.setText("")
             }
             else{
-                if(!validation.getValue("Name"))
+                textView_errors.text = ""
+                textView_errors.visibility = View.VISIBLE
+
+                if(!validation.getValue("Name")){
                     editText_itemName.error = getString(R.string.error_name_cannot_be_empty)
+                    textView_errors.text = "${textView_errors.text} , ${getString(R.string.item_error_nameempty)}"
+                }
                 if(!validation.getValue("Value"))
+                {
                     editText_value.error = getString(R.string.error_value_cannot_be_empty)
+                    textView_errors.text = "${textView_errors.text} , ${getString(R.string.item_error_valueempty)}"
+                }
                 if(!validation.getValue("Room"))
                     textView_errors.text = getString(R.string.error_select_a_room)
                 if(!validation.getValue("Type"))
                     textView_errors.text = getString(R.string.error_select_a_type)
             }
         }
+
+
     }
 
     private fun clearErrorMessage() {
-        textView_errors.clearComposingText()
+        textView_errors.text = ""
+        textView_errors.visibility = View.INVISIBLE
     }
 
     private fun validateInput(): Map<String,Boolean> {
