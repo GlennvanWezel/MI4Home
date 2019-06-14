@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -41,11 +43,15 @@ class ItemsActivity : AppCompatActivity() {
         bottom_nav.setupWithNavController(navController)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
+        signIn()
+
+    }
+
+    private fun signIn() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
 
-        //FirebaseAuth.getInstance().signOut()
         if(FirebaseAuth.getInstance().currentUser == null){
             ActivityCompat.startActivityForResult(this,
                 AuthUI.getInstance()
@@ -58,6 +64,20 @@ class ItemsActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().updateCurrentUser(FirebaseAuth.getInstance().currentUser!!)
             Log.d("Login","User was already logged in: ${FirebaseAuth.getInstance().currentUser?.uid}")
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId == R.id.btn_log_out){
+            AuthUI.getInstance().signOut(this@ItemsActivity)
+            signIn()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 

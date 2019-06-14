@@ -27,6 +27,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    buildToolsVersion = '28.0.3'
 }
 
 dependencies {
@@ -73,11 +78,11 @@ dependencies {
     implementation "org.kodein.di:kodein-di-framework-android-x:$kodein_version"
 
     // Better dateTime-time support even on older Android versions
-    implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
     // Glide = library for displaying/caching images
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     // Groupie RecyclerView = a simple recyclerviewer library to make complex things down to few lines of codes
     implementation 'com.xwray:groupie:2.1.0'

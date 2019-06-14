@@ -7,7 +7,6 @@ import com.example.mi4.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Source
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,7 +18,7 @@ class RoomRepositoryImpl : RoomRepository {
     var rooms = MutableLiveData<List<Room>>()
 
     fun getRooms(): LiveData<List<Room>> {
-        return rooms as LiveData<List<Room>>
+        return rooms
     }
 
     init {
@@ -78,7 +77,7 @@ class RoomRepositoryImpl : RoomRepository {
                     .getInstance()
                     .collection("users")
                     .document(FirebaseAuth.getInstance().currentUser!!.uid)
-                    .get(Source.CACHE)
+                    .get()
                     .await()
                     .toObject(User::class.java)!!
                     .rooms

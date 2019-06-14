@@ -22,5 +22,6 @@
     <string name="english">Engels</string>
     <string name="dutch">Nederands</string>
     <string name="settings">Instellingen</string>
+    <string name="log_out">Log Uit</string>
 
 </resources>

@@ -32,7 +32,6 @@ class itemListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(ItemListViewModel::class.java)
-        // TODO: Use the ViewModel
         rv_itemsList.visibility = View.INVISIBLE
         initialiseUi()
 

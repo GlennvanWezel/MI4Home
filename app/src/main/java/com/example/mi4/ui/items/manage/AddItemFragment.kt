@@ -41,7 +41,6 @@ class AddItemFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AddItemViewModel::class.java)
-        // TODO: Use the ViewModel
         initializeUi()
 
     }

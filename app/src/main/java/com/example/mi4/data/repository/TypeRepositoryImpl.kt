@@ -7,7 +7,6 @@ import com.example.mi4.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Source
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,7 +20,7 @@ class TypeRepositoryImpl : TypeRepository {
     var types = MutableLiveData<List<Type>>()
 
     fun getTypes(): LiveData<List<Type>> {
-        return types as LiveData<List<Type>>
+        return types
     }
 
     init {
@@ -73,7 +72,7 @@ class TypeRepositoryImpl : TypeRepository {
                     .getInstance()
                     .collection("users")
                     .document(FirebaseAuth.getInstance().currentUser!!.uid)
-                    .get(Source.CACHE)
+                    .get()
                     .await()
                     .toObject(User::class.java)!!
                     .types

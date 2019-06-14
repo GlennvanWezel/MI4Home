@@ -23,16 +23,16 @@ class AddItemViewModel : ViewModel() {
 
     init {
         items = itemsRepo.getitems()
-        rooms = roomsRepo.getRooms() // TODO: Change to .getrooms()
-        types = typesRepo.getTypes() // TODO: change to .gettypes()
+        rooms = roomsRepo.getRooms()
+        types = typesRepo.getTypes()
         itemsRepo.getitems().observeForever {
             items = itemsRepo.getitems()
         }
         typesRepo.types.observeForever {
-            types = typesRepo.getTypes() // TODO: change to .gettypes()
+            types = typesRepo.getTypes()
         }
         roomsRepo.rooms.observeForever {
-            rooms = roomsRepo.getRooms() // TODO: Change to .getrooms()
+            rooms = roomsRepo.getRooms()
         }
     }
 
@@ -80,8 +80,10 @@ class AddItemViewModel : ViewModel() {
 
     fun deleteType(typeToDelete: Type, moveAttachedItems: Boolean, typeToMoveTo: Type?){
         if(!moveAttachedItems){
+            //IGNORE THE LINE BELOW, IT IS TEMPORARY TO GET RID OF THE WARNING
+            typeToMoveTo.toString()
             //get all the items associated with this type
-            var items = itemsRepo.getAllItemsByType(typeToDelete.name)
+            val items = itemsRepo.getAllItemsByType(typeToDelete.name)
             //delete all the items collected above
             GlobalScope.launch {
                 items.forEach {
@@ -96,8 +98,10 @@ class AddItemViewModel : ViewModel() {
 
     fun deleteRoom(roomToDelete: Room, moveAttachedItems : Boolean, roomToMoveTo: Room?){
         if(!moveAttachedItems){
+            //IGNORE THE LINE BELOW, IT IS TEMPORARY TO GET RID OF THE WARNING
+            roomToMoveTo.toString()
             //get all the items associated with this room
-            var items = itemsRepo.getAllItemsByRoom(roomToDelete.name)
+            val items = itemsRepo.getAllItemsByRoom(roomToDelete.name)
             //delete all the items collected above
             GlobalScope.launch {
                 items.forEach {
