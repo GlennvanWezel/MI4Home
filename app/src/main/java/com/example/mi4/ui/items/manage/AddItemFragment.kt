@@ -59,7 +59,7 @@ class AddItemFragment : Fragment() {
             it.forEach {
                 roomsArrayAdaptersObserver.add(it)
             }
-            spinner_room.invalidate()
+            spinner_room?.invalidate()
         }
         spinner_room.adapter = roomsArrayAdaptersObserver
 
@@ -74,7 +74,7 @@ class AddItemFragment : Fragment() {
             it.forEach {
                 typesArrayAdaptersObserver.add(it)
             }
-            spinner_type.invalidate()
+            spinner_type?.invalidate()
         }
         this.spinner_type?.adapter = typesArrayAdaptersObserver
 
