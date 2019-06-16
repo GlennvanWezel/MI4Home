@@ -23,5 +23,9 @@
     <string name="dutch">Nederands</string>
     <string name="settings">Instellingen</string>
     <string name="log_out">Log Uit</string>
+    <string name="button_to_add_a_room">Knop om een kamer toe te voegen</string>
+    <string name="button_to_add_a_type">Knop om een categorie toe te voegen</string>
+    <string name="button_to_delete_a_type">Knop om een categorie te verwijderen</string>
+    <string name="button_to_delete_a_room">Knop om een kamer te verwijderen</string>
 
 </resources>

@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.items.manage.AddItemFragment">
+        tools:context="uk.co.vanwezel.mi4.ui.items.manage.AddItemFragment" android:id="@+id/cl_add_item_fragment">
 
     <LinearLayout
             android:id="@+id/ll_item"
@@ -88,6 +88,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/btn_addRoom"
+                android:contentDescription="@string/button_to_add_a_room"
                 style="@style/Widget.AppCompat.ImageButton"
                 android:scaleType="center"
                 android:importantForAutofill="no" android:tint="#43A047"
@@ -100,7 +101,9 @@
                 android:src="@android:drawable/ic_menu_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_delete_room" android:tint="#F00303"
+                android:id="@+id/btn_delete_room"
+                android:contentDescription="@string/button_to_delete_a_room"
+                android:tint="#F00303"
                 android:background="@android:color/transparent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -140,6 +143,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/btn_addType"
+                android:contentDescription="@string/button_to_add_a_type"
                 android:tint="#43A047"
                 android:background="@android:color/transparent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -150,7 +154,9 @@
                 android:src="@android:drawable/ic_menu_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_delete_type" android:tint="#F00303"
+                android:id="@+id/btn_delete_type"
+                android:contentDescription="@string/button_to_delete_a_type"
+                android:tint="#F00303"
                 android:background="@android:color/transparent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -12,9 +12,17 @@ apply plugin: "androidx.navigation.safeargs"
 
 
 android {
+    signingConfigs {
+        HomeInventorizerSigning {
+            storeFile file('C:\\Users\\Glenn\\OneDrive - ODISEE\\Persoonlijke projecten\\HomeInventorizerKeyStore.jks')
+            storePassword 'J35S!e271298?'
+            keyAlias = 'HomeInventorizerKey'
+            keyPassword 'J35S!e271298?'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.mi4"
+        applicationId "uk.co.vanwezel.mi4"
         minSdkVersion 26
         targetSdkVersion 28
         versionCode 1

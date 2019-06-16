@@ -4,14 +4,14 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/mobile_navigation"
             app:startDestination="@id/itemListFragment">
 
-    <fragment android:id="@+id/settingsFragment" android:name="com.example.mi4.ui.settings.SettingsFragment"
+    <fragment android:id="@+id/settingsFragment" android:name="uk.co.vanwezel.mi4.ui.settings.SettingsFragment"
               android:label="SettingsFragment"/>
-    <fragment android:id="@+id/itemListFragment" android:name="com.example.mi4.ui.items.list.itemListFragment"
+    <fragment android:id="@+id/itemListFragment" android:name="uk.co.vanwezel.mi4.ui.items.list.itemListFragment"
               android:label="item_list_fragment" tools:layout="@layout/item_list_fragment">
         <action android:id="@+id/action_itemListFragment_to_addItemFragment" app:destination="@id/addItemFragment"/>
         <action android:id="@+id/action_itemListFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
     </fragment>
-    <fragment android:id="@+id/addItemFragment" android:name="com.example.mi4.ui.items.manage.AddItemFragment"
+    <fragment android:id="@+id/addItemFragment" android:name="uk.co.vanwezel.mi4.ui.items.manage.AddItemFragment"
               android:label="add_item_fragment" tools:layout="@layout/add_item_fragment">
         <action android:id="@+id/action_addItemFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
         <action android:id="@+id/action_addItemFragment_to_itemListFragment" app:destination="@id/itemListFragment"

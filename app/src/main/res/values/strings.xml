@@ -22,4 +22,8 @@
     <string name="dutch">Dutch</string>
     <string name="settings">Settings</string>
     <string name="log_out">Log Out</string>
+    <string name="button_to_add_a_room">Button to add a room</string>
+    <string name="button_to_delete_a_room">Button to delete a room</string>
+    <string name="button_to_add_a_type">Button to add a type</string>
+    <string name="button_to_delete_a_type">Button to delete a type</string>
 </resources>
