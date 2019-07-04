@@ -58,6 +58,7 @@ class AddItemFragment : Fragment() {
             it.forEach {
                 roomsArrayAdaptersObserver.add(it)
             }
+            //spinner_room.setSelection(spinner_room.lastVisiblePosition)
             spinner_room?.invalidate()
         }
         spinner_room.adapter = roomsArrayAdaptersObserver
@@ -73,6 +74,7 @@ class AddItemFragment : Fragment() {
             it.forEach {
                 typesArrayAdaptersObserver.add(it)
             }
+            //spinner_type.setSelection(spinner_type.lastVisiblePosition)
             spinner_type?.invalidate()
         }
         this.spinner_type?.adapter = typesArrayAdaptersObserver
@@ -99,6 +101,7 @@ class AddItemFragment : Fragment() {
             builder.setCancelable(false)
                 .setPositiveButton("OK") { _, _ ->
                     viewModel.addType(view.editTextDialogUserInput.text.toString())
+                    spinner_type.setSelection(spinner_type.count - 1)
                 }
                 .setNegativeButton("Cancel") { _, _ ->
                     //do nothing

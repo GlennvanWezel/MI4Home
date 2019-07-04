@@ -15,6 +15,10 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -32,6 +36,9 @@ import uk.co.vanwezel.mi4.data.model.User
 
 class ItemsActivity : AppCompatActivity() {
 
+
+    private lateinit var mInterstitialAd: InterstitialAd
+
     val RC_SIGN_IN = 1000
     val firestoreInstance = FirebaseFirestore.getInstance()
     private lateinit var navController: NavController
@@ -39,9 +46,13 @@ class ItemsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        MobileAds.initialize(this, getString(R.string.admob_app_id))
         setContentView(R.layout.activity_items)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayUseLogoEnabled(true)
+
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
@@ -49,6 +60,19 @@ class ItemsActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController)
 
         signIn()
+        //ADMOB TEST!!!
+        mInterstitialAd = InterstitialAd(this)
+        //TODO: replace with R.string.added_item_interstitial_ad once testing is done
+        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+        mInterstitialAd.adListener = object: AdListener(){
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                mInterstitialAd.show()
+            }
+        }
+
 
     }
 
@@ -67,7 +91,7 @@ class ItemsActivity : AppCompatActivity() {
             )
         } else {
             FirebaseAuth.getInstance().updateCurrentUser(FirebaseAuth.getInstance().currentUser!!)
-            Log.d("Login", "User was already logged in: ${FirebaseAuth.getInstance().currentUser?.uid}")
+            Log.d("Login", "User was already logged in: ${FirebaseAuth.getInstance().currentUser?.email}")
         }
     }
 
@@ -98,6 +122,9 @@ class ItemsActivity : AppCompatActivity() {
                 Log.d("USER", "USER: " + user.toString())
                 if (response!!.isNewUser)
                     createFirestoreDBForNewUser(user)
+                else
+                    Log.d("USER LOGIN:", "Existing user: ${response.user.name}")
+
             } else {
                 // Sign in failed. If response is null the user canceled the
                 // sign-in flow using the back button. Otherwise check
@@ -131,7 +158,6 @@ class ItemsActivity : AppCompatActivity() {
                     Log.d("USER LOGIN:", "New user, database created")
 
                 } else {
-                    Log.d("USER LOGIN:", "Existing user")
                 }
             }
         }

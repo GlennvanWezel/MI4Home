@@ -98,7 +98,7 @@ class RoomRepositoryImpl : RoomRepository {
             .get()
             .await()
 
-        if (currentRooms != null) {
+        if (currentRooms.exists()) {
             updateRooms(currentRooms.toObject(User::class.java)!!.rooms.toMutableList())
         }
     }

@@ -74,11 +74,11 @@ class TypeRepositoryImpl : TypeRepository {
             .get()
             .await()
 
-        if (list != null) {
+        if (list.exists()) {
             typesList = list.toObject(User::class.java)!!.types.toMutableList()
             types.postValue(typesList)
         }
-        TODO("Implement a helper method that takes care of updating the typeslist and propegating changes to the livedata")
+        //TODO: Implement a helper method that takes care of updating the typeslist and propegating changes to the livedata
     }
 
     //endregion

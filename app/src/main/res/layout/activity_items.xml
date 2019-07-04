@@ -16,6 +16,7 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ToolbarTheme"
             app:logo="@drawable/ic_logo"
+
     />
 
     <fragment

@@ -93,7 +93,7 @@ class ItemRepositoryImpl : ItemRepository {
 
         //if there are any items found online, update the itemsList and post it to the items LiveData
         //this will only happen if the user is NEW and does not have a document for his/her account yet
-        if(currentItems != null){
+        if(currentItems.exists()){
             updateItems(currentItems.toObject(User::class.java)?.items!!.toMutableList())
         }
 
