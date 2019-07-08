@@ -10,6 +10,8 @@ apply plugin: "kotlin-kapt"
 
 apply plugin: "androidx.navigation.safeargs"
 
+apply plugin: 'com.google.firebase.firebase-perf'
+
 
 android {
     signingConfigs {
@@ -129,5 +131,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-measurement-sdk:17.0.0'
     implementation 'com.google.firebase:firebase-ads:18.0.0'
 
+    //Performance monitoring for firebase
+    implementation 'com.google.firebase:firebase-perf:18.0.1'
 
 }

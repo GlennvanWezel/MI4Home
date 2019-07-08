@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import kotlinx.android.synthetic.main.add_item_fragment.*
 import kotlinx.android.synthetic.main.alert_dialog.view.*
 import kotlinx.android.synthetic.main.alert_dialog_delete.*
@@ -26,6 +28,9 @@ class AddItemFragment : Fragment() {
     companion object {
         fun newInstance() = AddItemFragment()
     }
+
+    lateinit var mAdView : AdView
+
 
     private lateinit var viewModel: AddItemViewModel
 
@@ -47,7 +52,7 @@ class AddItemFragment : Fragment() {
 
     @SuppressLint("InflateParams", "SetTextI18n")
     private fun initializeUi(){
-
+        adview.loadAd(AdRequest.Builder().build())
         val roomsArrayAdaptersObserver =
             ArrayAdapter<Room>(
                 this.context!!,

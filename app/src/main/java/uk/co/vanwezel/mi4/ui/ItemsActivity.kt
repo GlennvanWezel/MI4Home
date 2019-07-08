@@ -52,6 +52,7 @@ class ItemsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayUseLogoEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
 
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
@@ -61,9 +62,10 @@ class ItemsActivity : AppCompatActivity() {
 
         signIn()
         //ADMOB TEST!!!
+        //InterstitialAd does not need an element in the xm layout to display in
         mInterstitialAd = InterstitialAd(this)
-        //TODO: replace with R.string.added_item_interstitial_ad once testing is done
-        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        //done: replace with R.string.added_item_interstitial_ad once testing is done
+        mInterstitialAd.adUnitId = getString(R.string.testad_interstitial)
 
         mInterstitialAd.loadAd(AdRequest.Builder().build())
         mInterstitialAd.adListener = object: AdListener(){
@@ -104,6 +106,10 @@ class ItemsActivity : AppCompatActivity() {
         if (item?.itemId == R.id.btn_log_out) {
             AuthUI.getInstance().signOut(this@ItemsActivity)
             signIn()
+        }
+
+        if(item?.itemId == R.id.home){
+            
         }
 
         return super.onOptionsItemSelected(item)

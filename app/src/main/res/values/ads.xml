@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string translatable="false" name="admob_app_id" >ca-app-pub-1291159884623909~4387272383</string>
+    <string translatable="false" name="added_item_interstitial_ad" >ca-app-pub-1291159884623909/9994822286</string>
+    <string translatable="false" name="temp_add_item_banner">ca-app-pub-1291159884623909/9541226837</string>
+    <string translatable="false" name="testad_banner">ca-app-pub-3940256099942544/6300978111</string>
+    <string translatable="false" name="testad_interstitial">ca-app-pub-3940256099942544/1033173712</string>
+    <string translatable="false" name="testa_reward"></string>
+</resources>

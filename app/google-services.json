@@ -10,6 +10,36 @@
       "client_info": {
         "mobilesdk_app_id": "1:186593579092:android:ce5ea10872dcbcd8",
         "android_client_info": {
+          "package_name": "co.uk.vanwezel.mi4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186593579092-cclsk4ipvgmnij5kpuqa8e9pit3ffure.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXLMvHVxhLQ97y7jstjzZ0OKNTmeLYptM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186593579092-cclsk4ipvgmnij5kpuqa8e9pit3ffure.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-1291159884623909~4387272383"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186593579092:android:1abd02146f2a6fb6",
+        "android_client_info": {
           "package_name": "uk.co.vanwezel.mi4"
         }
       },

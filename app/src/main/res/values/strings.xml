@@ -27,6 +27,5 @@
     <string name="button_to_add_a_type">Button to add a type</string>
     <string name="button_to_delete_a_type">Button to delete a type</string>
 
-    <string name="admob_app_id" translatable="false">ca-app-pub-1291159884623909~4387272383</string>
-    <string name="added_item_interstitial_ad" translatable="false">ca-app-pub-1291159884623909/9994822286</string>
+
 </resources>
