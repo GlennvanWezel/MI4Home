@@ -3,13 +3,16 @@
     <item
             android:id="@+id/itemListFragment"
             android:icon="@drawable/ic_inventory_list"
-            android:title="Inventory"/>
+            android:title="@string/inventory"/>
     <item
             android:id="@+id/addItemFragment"
             android:icon="@drawable/ic_add_item"
-            android:title="Add Item"/>
+            android:title="@string/add_item"/>
     <item
             android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_settings"
-            android:title="Settings"/>
+            android:title="@string/settings"/>
+    <item android:id="@+id/statisticsFragment"
+          android:icon="@drawable/baseline_bar_chart_24"
+          android:title="@string/settings"/>
 </menu>

@@ -10,6 +10,8 @@
               android:label="item_list_fragment" tools:layout="@layout/item_list_fragment">
         <action android:id="@+id/action_itemListFragment_to_addItemFragment" app:destination="@id/addItemFragment"/>
         <action android:id="@+id/action_itemListFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
+        <action android:id="@+id/action_itemListFragment_to_statisticsFragment"
+                app:destination="@id/statisticsFragment"/>
     </fragment>
     <fragment android:id="@+id/addItemFragment" android:name="uk.co.vanwezel.mi4.ui.items.manage.AddItemFragment"
               android:label="add_item_fragment" tools:layout="@layout/add_item_fragment">
@@ -17,4 +19,7 @@
         <action android:id="@+id/action_addItemFragment_to_itemListFragment" app:destination="@id/itemListFragment"
                 app:exitAnim="@anim/fui_slide_out_left" app:enterAnim="@anim/fui_slide_in_right"/>
     </fragment>
+    <fragment android:id="@+id/statisticsFragment"
+              android:name="uk.co.vanwezel.mi4.ui.items.statistics.StatisticsFragment"
+              android:label="statistics_fragment" tools:layout="@layout/statistics_fragment"/>
 </navigation>

@@ -134,4 +134,8 @@ dependencies {
     //Performance monitoring for firebase
     implementation 'com.google.firebase:firebase-perf:18.0.1'
 
+    //Charts
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    //implementation 'com.github.lecho:hellocharts-android:v1.5.8'
+
 }

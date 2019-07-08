@@ -27,5 +27,6 @@
     <string name="button_to_add_a_type">Button to add a type</string>
     <string name="button_to_delete_a_type">Button to delete a type</string>
     <string name="button_to_delete_a_room">Button to delete a room</string>
+    <string name="inventory">Inventory</string>
 
 </resources>
