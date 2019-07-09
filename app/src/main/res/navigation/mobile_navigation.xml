@@ -8,10 +8,15 @@
               android:label="SettingsFragment"/>
     <fragment android:id="@+id/itemListFragment" android:name="uk.co.vanwezel.mi4.ui.items.list.itemListFragment"
               android:label="item_list_fragment" tools:layout="@layout/item_list_fragment">
-        <action android:id="@+id/action_itemListFragment_to_addItemFragment" app:destination="@id/addItemFragment"/>
+        <action android:id="@+id/action_itemListFragment_to_addItemFragment" app:destination="@id/addItemFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpTo="@+id/itemListFragment"/>
         <action android:id="@+id/action_itemListFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
         <action android:id="@+id/action_itemListFragment_to_statisticsFragment"
-                app:destination="@id/statisticsFragment"/>
+                app:destination="@+id/statisticsFragment" app:enterAnim="@anim/fui_slide_in_right"
+                app:exitAnim="@anim/fui_slide_out_left" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" app:popUpTo="@+id/itemListFragment"/>
     </fragment>
     <fragment android:id="@+id/addItemFragment" android:name="uk.co.vanwezel.mi4.ui.items.manage.AddItemFragment"
               android:label="add_item_fragment" tools:layout="@layout/add_item_fragment">

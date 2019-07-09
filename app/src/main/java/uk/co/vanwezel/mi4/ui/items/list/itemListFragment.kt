@@ -9,6 +9,7 @@ import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.item_list_fragment.*
 import uk.co.vanwezel.mi4.R
@@ -53,7 +54,9 @@ class itemListFragment : Fragment() {
     private fun initialiseUi() {
         showLoading()
 
-
+        fab.setOnClickListener {
+            findNavController().navigate(R.id.action_itemListFragment_to_addItemFragment)
+        }
 
         rv_itemsList.layoutManager = LinearLayoutManager(context)
 

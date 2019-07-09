@@ -49,9 +49,9 @@ class ItemsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_items)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(false)
         supportActionBar?.setDisplayUseLogoEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(false)
 
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
