@@ -28,5 +28,6 @@
     <string name="button_to_delete_a_type">Knop om een categorie te verwijderen</string>
     <string name="button_to_delete_a_room">Knop om een kamer te verwijderen</string>
     <string name="inventory">Inventaris</string>
+    <string name="button_pressed">Button Pressed</string>
 
 </resources>

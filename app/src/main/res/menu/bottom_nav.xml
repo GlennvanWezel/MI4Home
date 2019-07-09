@@ -8,11 +8,12 @@
             android:id="@+id/addItemFragment"
             android:icon="@drawable/ic_add_item"
             android:title="@string/add_item"/>
+    <item android:id="@+id/statisticsFragment"
+          android:icon="@drawable/baseline_bar_chart_24"
+          android:title="@string/statistics"/>
     <item
             android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_settings"
             android:title="@string/settings"/>
-    <item android:id="@+id/statisticsFragment"
-          android:icon="@drawable/baseline_bar_chart_24"
-          android:title="@string/settings"/>
+
 </menu>

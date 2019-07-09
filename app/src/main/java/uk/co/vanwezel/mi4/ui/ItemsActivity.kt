@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -15,8 +16,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
@@ -63,17 +62,17 @@ class ItemsActivity : AppCompatActivity() {
         signIn()
         //ADMOB TEST!!!
         //InterstitialAd does not need an element in the xm layout to display in
-        mInterstitialAd = InterstitialAd(this)
-        //done: replace with R.string.added_item_interstitial_ad once testing is done
-        mInterstitialAd.adUnitId = getString(R.string.testad_interstitial)
-
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
-        mInterstitialAd.adListener = object: AdListener(){
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                mInterstitialAd.show()
-            }
-        }
+//        mInterstitialAd = InterstitialAd(this)
+//        //done: replace with R.string.added_item_interstitial_ad once testing is done
+//        mInterstitialAd.adUnitId = getString(R.string.testad_interstitial)
+//
+//        mInterstitialAd.loadAd(AdRequest.Builder().build())
+//        mInterstitialAd.adListener = object: AdListener(){
+//            override fun onAdLoaded() {
+//                super.onAdLoaded()
+//                mInterstitialAd.show()
+//            }
+//        }
 
 
     }
@@ -109,7 +108,7 @@ class ItemsActivity : AppCompatActivity() {
         }
 
         if(item?.itemId == R.id.home){
-            
+
         }
 
         return super.onOptionsItemSelected(item)
@@ -174,11 +173,23 @@ class ItemsActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController, null)
     }
 
+
+
+    //region Helper methods
     fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
         fragmentTransaction.commit()
     }
 
+    fun showToastLong(msg: String){
+        Toast.makeText(baseContext,msg,Toast.LENGTH_LONG).show()
+    }
+
+    fun showToastshort(msg: String){
+        Toast.makeText(this,msg,Toast.LENGTH_LONG).show()
+    }
+
+    //endregion
 
 }

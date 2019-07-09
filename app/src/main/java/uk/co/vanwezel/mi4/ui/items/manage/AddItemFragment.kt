@@ -85,6 +85,7 @@ class AddItemFragment : Fragment() {
         this.spinner_type?.adapter = typesArrayAdaptersObserver
 
         btn_addRoom.setOnClickListener {
+            Log.d("action:", "add_item button pressed")
             val view = LayoutInflater.from(context).inflate(R.layout.alert_dialog, null)
             val builder = AlertDialog.Builder(this.context)
             builder.setView(view)
